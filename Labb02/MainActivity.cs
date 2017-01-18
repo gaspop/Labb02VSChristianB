@@ -8,6 +8,7 @@ namespace Labb02
     public class MainActivity : Activity
     {
         TextView tv;
+        Button btn;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -17,8 +18,13 @@ namespace Labb02
             SetContentView (Resource.Layout.Main);
 
             tv = FindViewById<TextView>(Resource.Id.tv1);
-            tv.Text = "Hej hej!";
+            btn = FindViewById<Button>(Resource.Id.btn1);
 
+            btn.Click += delegate
+            {
+                tv.Text = "Hej hej!";
+            };
+            
         }
     }
 }
