@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">BankApp</string>
+    <string name="ApplicationName">Bookkeeper</string>
+	<string name="mainMenuHeader">Välj alternativ</string>
+	<string name="mainMenuNewEvent">Ny händelse</string>
+	<string name="mainMenuShowAllEvents">Visa alla händelser</string>
+	<string name="mainMenuCreateReports">Skapa rapporter</string>
+
+	<string name="eventDescription">Här kan du lägga till nya händelser, antingen inkomster eller utgifter</string>
+	
 </resources>

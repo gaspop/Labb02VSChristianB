@@ -3,19 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:id="@+id/rl1">
+    android:id="@+id/rlRoot">
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="Hej!"
-        android:id="@+id/tv1" />
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:text="Click Me!"
-        android:id="@+id/btn1" />
+        android:textSize="30sp"
+        android:text="@string/mainMenuHeader"
+        android:id="@+id/tvHeader" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/llMenu">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mainMenuNewEvent"
+            android:id="@+id/btnNewEvent" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mainMenuShowAllEvents"
+            android:id="@+id/btnShowAllEvents" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mainMenuCreateReports"
+            android:id="@+id/btnCreateReports" />
+    </LinearLayout>
 </RelativeLayout>
