@@ -4,10 +4,149 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:id="@+id/rlRoot">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/eventDescription"
-        android:id="@+id/tvDescription" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_weight="3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/eventInstructions"
+            android:id="@+id/tvDescription" />
+        <RadioGroup
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eventIncome"
+                android:id="@+id/btnSetIncome" />
+            <RadioButton
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eventExpense"
+                android:id="@+id/btnSetExpense" />
+        </RadioGroup>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/event_column_label_text_size"
+                android:text="@string/eventDate" />
+            <EditText
+                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/etDate" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/event_column_label_text_size"
+                android:text="@string/eventDescription" />
+            <EditText
+                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/etDescription" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/event_column_label_text_size"
+                android:text="@string/eventType" />
+            <Spinner
+                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinType" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/event_column_label_text_size"
+                android:text="@string/eventToFromAccount" />
+            <Spinner
+                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinAccount" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/event_column_label_text_size"
+                android:text="@string/eventTotalSumVAT" />
+            <EditText
+                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/etTotalSum" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/event_column_label_text_size"
+                android:text="@string/eventVAT" />
+            <Spinner
+                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinVAT" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:text="@string/eventAddEvent"
+                android:id="@+id/btnAddEvent" />
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
