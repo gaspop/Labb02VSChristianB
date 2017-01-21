@@ -53,10 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\BookkeeperManager.cs" />
+    <Compile Include="Model\Entry.cs" />
+    <Compile Include="Model\TaxRate.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EventActivity.cs" />
+    <Compile Include="Activities\EventActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />

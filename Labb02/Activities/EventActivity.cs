@@ -10,6 +10,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Util;
+
+using Labb02.Model;
 
 namespace Labb02
 {
@@ -20,7 +23,16 @@ namespace Labb02
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Event);
-			// Create your application here
-		}
-	}
+            // Create your application here
+
+            Log.Debug("Event", string.Join("\n", BookkeeperManager.Instance.MoneyAccounts));
+
+        }
+
+        private void AddEntry(Entry entry)
+        {
+
+        }
+
+    }
 }
