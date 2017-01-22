@@ -13,7 +13,7 @@ using Android.Widget;
 namespace Labb02.Model
 {
 
-    public enum EventType { Income, Expense }
+    public enum EventType { Income = 1 , Expense = 2 }
 
     public class Entry
     {

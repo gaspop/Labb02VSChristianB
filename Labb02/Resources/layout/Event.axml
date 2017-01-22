@@ -26,13 +26,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/eventIncome"
-                android:id="@+id/btnSetIncome" />
+                android:id="@+id/radSetIncome" />
             <RadioButton
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/eventExpense"
-                android:id="@+id/btnSetExpense" />
+                android:id="@+id/radSetExpense" />
         </RadioGroup>
         <LinearLayout
             android:orientation="horizontal"

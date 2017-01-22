@@ -41,6 +41,14 @@ namespace Labb02.Model
             expenseAccounts = new List<Account>();
             moneyAccounts = new List<Account>();
             taxRates = new List<TaxRate>();
+
+            incomeAccounts.Add(new Account("Försäljning", 1));
+            incomeAccounts.Add(new Account("Skumaffärer", 2));
+
+            expenseAccounts.Add(new Account("Inköp", 1));
+            moneyAccounts.Add(new Account("Kassa", 1));
+
+            taxRates.Add(new TaxRate(6));
         }
 
         public List<Entry> Entries
@@ -73,24 +81,5 @@ namespace Labb02.Model
             entries.Add(entry);
         }
 
-        public void AddIncomeAccount(Account account)
-        {
-            incomeAccounts.Add(account);
-        }
-
-        public void AddExpenseAccount(Account account)
-        {
-            expenseAccounts.Add(account);
-        }
-
-        public void AddMoneyAccount(Account account)
-        {
-            moneyAccounts.Add(account);
-        }
-
-        public void AddTaxRate(TaxRate taxRate)
-        {
-            taxRates.Add(taxRate);
-        }
     }
 }

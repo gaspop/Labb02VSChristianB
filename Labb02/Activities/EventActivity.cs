@@ -21,8 +21,11 @@ namespace Labb02
 	{
         public static readonly string TAG = "EventActivity";
 
-        Button btnDate;
         DateTime eventDate;
+        Button btnDate, btnAddEntry;
+        RadioButton radSetIncome, radSetExpense;
+        EditText etDescription, etTotalSum;
+        Spinner spinType, spinAccount, spinVAT;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -33,11 +36,22 @@ namespace Labb02
             // Run View Element setup
             InstantiateViews();
             SetupViews();
+            SetupRadioButtons();
+            SetupAccountSpinner(spinAccount, BookkeeperManager.Instance.MoneyAccounts);
+            SetupTaxRateSpinner();
         }
 
         private void InstantiateViews()
         {
             btnDate = FindViewById<Button>(Resource.Id.btnDate);
+            btnAddEntry = FindViewById<Button>(Resource.Id.btnAddEvent);
+            radSetIncome = FindViewById<RadioButton>(Resource.Id.radSetIncome);
+            radSetExpense = FindViewById<RadioButton>(Resource.Id.radSetExpense);
+            etDescription = FindViewById<EditText>(Resource.Id.etDescription);
+            etTotalSum = FindViewById<EditText>(Resource.Id.etTotalSum);
+            spinType = FindViewById<Spinner>(Resource.Id.spinType);
+            spinAccount = FindViewById<Spinner>(Resource.Id.spinAccount);
+            spinVAT = FindViewById<Spinner>(Resource.Id.spinVAT);
         }
 
         private void SetupViews()
@@ -47,6 +61,42 @@ namespace Labb02
 
             btnDate.Click += DateSelect_OnClick;
         }
+
+        private void SetupRadioButtons()
+        {
+            radSetIncome.Click += delegate
+            {
+                SetupAccountSpinner(spinType, BookkeeperManager.Instance.IncomeAccounts);
+            };
+
+            radSetExpense.Click += delegate
+            {
+                SetupAccountSpinner(spinType, BookkeeperManager.Instance.ExpenseAccounts);
+            };
+        }
+
+        private void SetupAccountSpinner(Spinner spinner, List<Account> list)
+        {
+            //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
+            ArrayAdapter adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerItem, list);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinner.Adapter = adapter;
+        }
+
+        private void SetupTaxRateSpinner()
+        {
+            List<TaxRate> list = BookkeeperManager.Instance.TaxRates;
+            ArrayAdapter adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerItem, list);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinVAT.Adapter = adapter;
+        }
+
+        /*
+        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Log.Debug(TAG, "Item selected!");
+        }
+        */
 
         void DateSelect_OnClick(object sender, EventArgs eventArgs)
         {
@@ -62,7 +112,7 @@ namespace Labb02
         {
             Log.Debug(TAG, "Updating date: " + newDate.ToLongDateString());
             eventDate = newDate;
-            btnDate.Text = eventDate.ToShortDateString();
+            btnDate.Text = eventDate.ToString("yyyy-MM-dd");
         }
 
         private void AddEntry(Entry entry)

@@ -88,12 +88,6 @@ namespace Labb02
 			// aapt resource value: 0x7f07000d
 			public const int btnNewEvent = 2131165197;
 			
-			// aapt resource value: 0x7f070003
-			public const int btnSetExpense = 2131165187;
-			
-			// aapt resource value: 0x7f070002
-			public const int btnSetIncome = 2131165186;
-			
 			// aapt resource value: 0x7f07000e
 			public const int btnShowAllEvents = 2131165198;
 			
@@ -105,6 +99,12 @@ namespace Labb02
 			
 			// aapt resource value: 0x7f07000c
 			public const int llMenu = 2131165196;
+			
+			// aapt resource value: 0x7f070003
+			public const int radSetExpense = 2131165187;
+			
+			// aapt resource value: 0x7f070002
+			public const int radSetIncome = 2131165186;
 			
 			// aapt resource value: 0x7f070000
 			public const int rlRoot = 2131165184;

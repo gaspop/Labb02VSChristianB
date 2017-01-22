@@ -25,7 +25,7 @@ namespace Labb02.Model
 
         public override string ToString()
         {
-            return "Name: " + Name + "\nNumber: " + Number;
+            return Number + ": " + Name;
         }
 
     }

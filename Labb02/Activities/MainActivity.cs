@@ -24,10 +24,6 @@ namespace Labb02
             // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.Main);
 			setupButtons();
-
-            BookkeeperManager.Instance.AddMoneyAccount(new Model.Account("Bajskorv", 55));
-            BookkeeperManager.Instance.AddMoneyAccount(new Model.Account("Toalett", 30));
-
             Log.Debug("Main", string.Join("\n", BookkeeperManager.Instance.MoneyAccounts));
 
         }
