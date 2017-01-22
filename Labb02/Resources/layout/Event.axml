@@ -45,11 +45,19 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/event_column_label_text_size"
                 android:text="@string/eventDate" />
+            <Button
+                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/event_column_label_text_size"
+                android:id="@+id/btnDate" />
+            <!--
             <EditText
                 android:layout_weight="@integer/event_column_data_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/etDate" />
+                android:id="@+id/etDate" /> 
+            -->
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"

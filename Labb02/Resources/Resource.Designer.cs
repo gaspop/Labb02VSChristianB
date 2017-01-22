@@ -82,6 +82,9 @@ namespace Labb02
 			// aapt resource value: 0x7f07000f
 			public const int btnCreateReports = 2131165199;
 			
+			// aapt resource value: 0x7f070004
+			public const int btnDate = 2131165188;
+			
 			// aapt resource value: 0x7f07000d
 			public const int btnNewEvent = 2131165197;
 			
@@ -93,9 +96,6 @@ namespace Labb02
 			
 			// aapt resource value: 0x7f07000e
 			public const int btnShowAllEvents = 2131165198;
-			
-			// aapt resource value: 0x7f070004
-			public const int etDate = 2131165188;
 			
 			// aapt resource value: 0x7f070005
 			public const int etDescription = 2131165189;
