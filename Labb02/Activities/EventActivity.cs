@@ -21,7 +21,10 @@ namespace Labb02
 	{
         public static readonly string TAG = "EventActivity";
 
-        DateTime eventDate;
+        EntryType entryType;
+        List<Account> entryTypeList;
+        DateTime entryDate;
+
         Button btnDate, btnAddEntry;
         RadioButton radSetIncome, radSetExpense;
         EditText etDescription, etTotalSum;
@@ -56,21 +59,27 @@ namespace Labb02
 
         private void SetupViews()
         {
-            if (eventDate == DateTime.MinValue)
+            if (entryDate == DateTime.MinValue)
                 UpdateDate(DateTime.Now);
 
             btnDate.Click += DateSelect_OnClick;
+
+            btnAddEntry.Click += delegate { ValidateData(); };
         }
 
         private void SetupRadioButtons()
         {
             radSetIncome.Click += delegate
             {
+                entryType = EntryType.Income;
+                entryTypeList = BookkeeperManager.Instance.IncomeAccounts;
                 SetupAccountSpinner(spinType, BookkeeperManager.Instance.IncomeAccounts);
             };
 
             radSetExpense.Click += delegate
             {
+                entryType = EntryType.Expense;
+                entryTypeList = BookkeeperManager.Instance.ExpenseAccounts;
                 SetupAccountSpinner(spinType, BookkeeperManager.Instance.ExpenseAccounts);
             };
         }
@@ -111,8 +120,59 @@ namespace Labb02
         private void UpdateDate(DateTime newDate)
         {
             Log.Debug(TAG, "Updating date: " + newDate.ToLongDateString());
-            eventDate = newDate;
-            btnDate.Text = eventDate.ToString("yyyy-MM-dd");
+            entryDate = newDate;
+            btnDate.Text = entryDate.ToString("yyyy-MM-dd");
+        }
+
+
+        private Account GetAccountFromSpinner(Spinner spin, List<Account> list)
+        {
+            string text = spin.SelectedItem.ToString();
+            string[] textData = text.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            try
+            {
+                int dataId = Convert.ToInt32(textData[0]);
+                var find = list.Where(a => a.Number == dataId).ToList<Account>();
+                if (find.Count == 0)
+                {
+                    Log.Debug(TAG, "GetAccountFromSpinner: No match");
+                    return null;
+                }
+                else
+                {
+                    Log.Debug(TAG, "GetAccountFromSpinner: Returning '" + find[0] +"'");
+                    return find[0];
+                }
+            }
+            catch
+            {
+                Log.Debug(TAG, "GetAccountFromSpinner: Error!");
+                return null;
+            }
+        }
+
+        private TaxRate GetTaxRateFromSpinner()
+        {
+            string text = spinVAT.SelectedItem.ToString();
+            int i = text.IndexOf('%');
+            string sub = text.Substring(0,text.Length - (text.Length - i));
+            int data = Convert.ToInt32(sub);
+            var find = BookkeeperManager.Instance.TaxRates.Where(t => t.VAT == data);
+
+            Log.Debug(TAG, "GetTaxRateFromSpinner: Returning '" + find.ToList<TaxRate>()[0] + "'");
+            return find.ToList<TaxRate>()[0];
+        }
+
+        private void ValidateData()
+        {
+            Entry e = new Entry();
+            e.Type = entryType;
+            e.Date = entryDate;
+            e.Description = etDescription.Text;
+            e.AccountType = GetAccountFromSpinner(spinType, entryTypeList);
+            e.AccountTarget = GetAccountFromSpinner(spinAccount, BookkeeperManager.Instance.MoneyAccounts);
+            e.SumTotal = Convert.ToInt32(etTotalSum.Text);
+            e.VAT = GetTaxRateFromSpinner();
         }
 
         private void AddEntry(Entry entry)
@@ -121,6 +181,8 @@ namespace Labb02
         }
 
     }
+
+
 
     public class DatePickerFragment : DialogFragment, DatePickerDialog.IOnDateSetListener
     {

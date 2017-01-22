@@ -13,15 +13,17 @@ using Android.Widget;
 namespace Labb02.Model
 {
 
-    public enum EventType { Income = 1 , Expense = 2 }
+    public enum EntryType { Income = 1 , Expense = 2 }
 
     public class Entry
     {
-        public EventType type { get; set; }
-        public int Sum { get; set; }
-        public string Date { get; set; }
+        public EntryType Type { get; set; }
+        public DateTime Date { get; set; }
         public string Description { get; set; }
-        public float VAT { get; set; }
+        public Account AccountType { get; set; }
+        public Account AccountTarget { get; set; }
+        public int SumTotal { get; set; }
+        public TaxRate VAT { get; set; }
     }
 
 }
