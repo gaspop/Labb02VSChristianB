@@ -44,6 +44,9 @@ namespace Labb02
 		public partial class Dimension
 		{
 			
+			// aapt resource value: 0x7f040001
+			public const int event_column_data_text_size = 2130968577;
+			
 			// aapt resource value: 0x7f040000
 			public const int event_column_label_text_size = 2130968576;
 			
@@ -76,29 +79,29 @@ namespace Labb02
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f07000a
-			public const int btnAddEvent = 2131165194;
+			// aapt resource value: 0x7f07000b
+			public const int btnAddEvent = 2131165195;
 			
-			// aapt resource value: 0x7f07000f
-			public const int btnCreateReports = 2131165199;
+			// aapt resource value: 0x7f070010
+			public const int btnCreateReports = 2131165200;
 			
 			// aapt resource value: 0x7f070004
 			public const int btnDate = 2131165188;
 			
-			// aapt resource value: 0x7f07000d
-			public const int btnNewEvent = 2131165197;
-			
 			// aapt resource value: 0x7f07000e
-			public const int btnShowAllEvents = 2131165198;
+			public const int btnNewEvent = 2131165198;
+			
+			// aapt resource value: 0x7f07000f
+			public const int btnShowAllEvents = 2131165199;
 			
 			// aapt resource value: 0x7f070005
 			public const int etDescription = 2131165189;
 			
-			// aapt resource value: 0x7f070008
-			public const int etTotalSum = 2131165192;
+			// aapt resource value: 0x7f070009
+			public const int etTotalSum = 2131165193;
 			
-			// aapt resource value: 0x7f07000c
-			public const int llMenu = 2131165196;
+			// aapt resource value: 0x7f07000d
+			public const int llMenu = 2131165197;
 			
 			// aapt resource value: 0x7f070003
 			public const int radSetExpense = 2131165187;
@@ -115,14 +118,17 @@ namespace Labb02
 			// aapt resource value: 0x7f070006
 			public const int spinType = 2131165190;
 			
-			// aapt resource value: 0x7f070009
-			public const int spinVAT = 2131165193;
+			// aapt resource value: 0x7f07000a
+			public const int spinVAT = 2131165194;
 			
 			// aapt resource value: 0x7f070001
 			public const int tvDescription = 2131165185;
 			
-			// aapt resource value: 0x7f07000b
-			public const int tvHeader = 2131165195;
+			// aapt resource value: 0x7f07000c
+			public const int tvHeader = 2131165196;
+			
+			// aapt resource value: 0x7f070008
+			public const int tvTotalSum = 2131165192;
 			
 			static Id()
 			{
@@ -162,6 +168,9 @@ namespace Labb02
 			// aapt resource value: 0x7f030001
 			public const int Main = 2130903041;
 			
+			// aapt resource value: 0x7f030002
+			public const int SpinnerItem = 2130903042;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -199,14 +208,17 @@ namespace Labb02
 			// aapt resource value: 0x7f06000c
 			public const int eventToFromAccount = 2131099660;
 			
+			// aapt resource value: 0x7f06000e
+			public const int eventTotalSum = 2131099662;
+			
 			// aapt resource value: 0x7f06000d
 			public const int eventTotalSumVAT = 2131099661;
 			
 			// aapt resource value: 0x7f06000b
 			public const int eventType = 2131099659;
 			
-			// aapt resource value: 0x7f06000e
-			public const int eventVAT = 2131099662;
+			// aapt resource value: 0x7f06000f
+			public const int eventVAT = 2131099663;
 			
 			// aapt resource value: 0x7f060004
 			public const int mainMenuCreateReports = 2131099652;

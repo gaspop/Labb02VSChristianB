@@ -28,6 +28,7 @@ namespace Labb02
         Button btnDate, btnAddEntry;
         RadioButton radSetIncome, radSetExpense;
         EditText etDescription, etTotalSum;
+        TextView tvTotalSum;
         Spinner spinType, spinAccount, spinVAT;
 
 		protected override void OnCreate(Bundle savedInstanceState)
@@ -52,6 +53,7 @@ namespace Labb02
             radSetExpense = FindViewById<RadioButton>(Resource.Id.radSetExpense);
             etDescription = FindViewById<EditText>(Resource.Id.etDescription);
             etTotalSum = FindViewById<EditText>(Resource.Id.etTotalSum);
+            tvTotalSum = FindViewById<TextView>(Resource.Id.tvTotalSum);
             spinType = FindViewById<Spinner>(Resource.Id.spinType);
             spinAccount = FindViewById<Spinner>(Resource.Id.spinAccount);
             spinVAT = FindViewById<Spinner>(Resource.Id.spinVAT);
@@ -59,35 +61,30 @@ namespace Labb02
 
         private void SetupViews()
         {
+
             if (entryDate == DateTime.MinValue)
                 UpdateDate(DateTime.Now);
 
             btnDate.Click += DateSelect_OnClick;
 
             btnAddEntry.Click += delegate { ValidateData(); };
+
+            SetModeIncome();
+
+            etTotalSum.TextChanged += delegate { UpdateTotalSum(); };
         }
 
         private void SetupRadioButtons()
         {
-            radSetIncome.Click += delegate
-            {
-                entryType = EntryType.Income;
-                entryTypeList = BookkeeperManager.Instance.IncomeAccounts;
-                SetupAccountSpinner(spinType, BookkeeperManager.Instance.IncomeAccounts);
-            };
+            radSetIncome.Click += delegate{ SetModeIncome(); };
 
-            radSetExpense.Click += delegate
-            {
-                entryType = EntryType.Expense;
-                entryTypeList = BookkeeperManager.Instance.ExpenseAccounts;
-                SetupAccountSpinner(spinType, BookkeeperManager.Instance.ExpenseAccounts);
-            };
+            radSetExpense.Click += delegate { SetModeExpense(); };
         }
 
         private void SetupAccountSpinner(Spinner spinner, List<Account> list)
         {
             //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
-            ArrayAdapter adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerItem, list);
+            ArrayAdapter adapter = new ArrayAdapter(this, Resource.Layout.SpinnerItem, list);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
         }
@@ -95,7 +92,7 @@ namespace Labb02
         private void SetupTaxRateSpinner()
         {
             List<TaxRate> list = BookkeeperManager.Instance.TaxRates;
-            ArrayAdapter adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleSpinnerItem, list);
+            ArrayAdapter adapter = new ArrayAdapter(this, Resource.Layout.SpinnerItem, list);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinVAT.Adapter = adapter;
         }
@@ -117,11 +114,43 @@ namespace Labb02
             frag.Show(FragmentManager, DatePickerFragment.TAG);
         }
 
+
+        private void SetModeIncome()
+        {
+            radSetIncome.Checked = true;
+            entryType = EntryType.Income;
+            entryTypeList = BookkeeperManager.Instance.IncomeAccounts;
+            SetupAccountSpinner(spinType, BookkeeperManager.Instance.IncomeAccounts);
+        }
+
+        private void SetModeExpense()
+        {
+            radSetExpense.Checked = true;
+            entryType = EntryType.Expense;
+            entryTypeList = BookkeeperManager.Instance.ExpenseAccounts;
+            SetupAccountSpinner(spinType, BookkeeperManager.Instance.ExpenseAccounts);
+        }
+
         private void UpdateDate(DateTime newDate)
         {
             Log.Debug(TAG, "Updating date: " + newDate.ToLongDateString());
             entryDate = newDate;
             btnDate.Text = entryDate.ToString("yyyy-MM-dd");
+        }
+
+        private void UpdateTotalSum()
+        {
+            TaxRate t = BookkeeperManager.Instance.TaxRates[spinVAT.SelectedItemPosition];
+            try
+            {
+                double sum = Convert.ToDouble(etTotalSum.Text);
+                sum *= 1.0 - ((double) t.VAT/100);
+                tvTotalSum.Text = String.Format("{0} :-",sum);
+            }
+            catch
+            {
+                tvTotalSum.Text = "-";
+            }
         }
 
 

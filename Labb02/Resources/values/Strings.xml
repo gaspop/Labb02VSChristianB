@@ -15,5 +15,6 @@
     <string name="eventType">Typ:</string>
     <string name="eventToFromAccount">Till/från konto:</string>
     <string name="eventTotalSumVAT">Totalt belopp (inkl. moms):</string>
+    <string name="eventTotalSum">Totalt belopp (exkl. moms):</string>
     <string name="eventVAT">Moms:</string>
 </resources>
