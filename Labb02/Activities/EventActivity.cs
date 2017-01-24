@@ -83,8 +83,9 @@ namespace Labb02
 
         private void SetupAccountSpinner(Spinner spinner, List<Account> list)
         {
+			
             //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
-            ArrayAdapter adapter = new ArrayAdapter(this, Resource.Layout.SpinnerItem, list);
+            ArrayAdapter adapter = new ArrayAdapter<Account>(this, Resource.Layout.SpinnerItem, list);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
         }
@@ -92,7 +93,7 @@ namespace Labb02
         private void SetupTaxRateSpinner()
         {
             List<TaxRate> list = BookkeeperManager.Instance.TaxRates;
-            ArrayAdapter adapter = new ArrayAdapter(this, Resource.Layout.SpinnerItem, list);
+            ArrayAdapter adapter = new ArrayAdapter<TaxRate>(this, Resource.Layout.SpinnerItem, list);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinVAT.Adapter = adapter;
         }
@@ -156,6 +157,7 @@ namespace Labb02
 
         private Account GetAccountFromSpinner(Spinner spin, List<Account> list)
         {
+			Log.Debug(TAG, "HELVETET: " + spin.Adapter.GetItem(spin.SelectedItemPosition).GetType());
             string text = spin.SelectedItem.ToString();
             string[] textData = text.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             try
@@ -198,6 +200,10 @@ namespace Labb02
             e.Type = entryType;
             e.Date = entryDate;
             e.Description = etDescription.Text;
+			var bajs = spinAccount.SelectedItem;
+			Log.Debug(TAG, "För helvete: " + bajs);
+			//e.AccountType = spinType.Adapter.G
+			//Account ass = spinAccount.GetItemAtPosition(spinAccount.SelectedItemPosition);
             e.AccountType = GetAccountFromSpinner(spinType, entryTypeList);
             e.AccountTarget = GetAccountFromSpinner(spinAccount, BookkeeperManager.Instance.MoneyAccounts);
             e.SumTotal = Convert.ToInt32(etTotalSum.Text);
