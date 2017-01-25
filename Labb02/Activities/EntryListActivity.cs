@@ -15,6 +15,7 @@ namespace Labb02
 	[Activity(Label = "EntryListActivity")]
 	public class EntryListActivity : Activity
 	{
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
