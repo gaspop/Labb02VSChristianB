@@ -49,6 +49,7 @@ namespace Labb02.Model
             moneyAccounts.Add(new Account("Kassa", 1));
 
             taxRates.Add(new TaxRate(6));
+			taxRates.Add(new TaxRate(4));
         }
 
         public List<Entry> Entries
@@ -80,6 +81,11 @@ namespace Labb02.Model
         {
             entries.Add(entry);
         }
+
+		public string EntryToString()
+		{
+			return string.Join("\n", Entries);
+		}
 
     }
 }

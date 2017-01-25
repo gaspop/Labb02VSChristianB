@@ -11,7 +11,8 @@ namespace Labb02
     [Activity(Label = "@string/ApplicationName", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        BookkeeperManager manager;
+
+		public static readonly string TAG = "MainActivity";
 
         Button btnNewEvent;
 		Button btnShowAllEvents;
@@ -22,11 +23,16 @@ namespace Labb02
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView (Resource.Layout.Main);
+            SetContentView (Resource.Layout.MainActivity);
 			setupButtons();
-            Log.Debug("Main", string.Join("\n", BookkeeperManager.Instance.MoneyAccounts));
 
         }
+
+		protected override void OnResume()
+		{
+			base.OnResume();
+			Log.Debug(TAG, BookkeeperManager.Instance.EntryToString());
+		}
 
         private void setupButtons()
 		{
@@ -36,9 +42,23 @@ namespace Labb02
 
 			btnNewEvent.Click += delegate
 			{
-				Intent i = new Intent(this, typeof(EventActivity));
+				Intent i = new Intent(this, typeof(EntryActivity));
 				StartActivity(i);
 			};
+
+			btnShowAllEvents.Click += delegate
+			{
+				Intent i = new Intent(this, typeof(EntryListActivity));
+				StartActivity(i);
+			};
+
+			btnCreateReports.Click += delegate
+			{
+				//Intent i = new Intent(this, typeof(EntryActivity));
+				//StartActivity(i);
+			};
+
+
 		}
 
     }

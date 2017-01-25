@@ -16,11 +16,12 @@ using Labb02.Model;
 
 namespace Labb02
 {
-	[Activity(Label = "EventActivity")]
-	public class EventActivity : Activity
+	[Activity(Label = "EntryActivity")]
+	public class EntryActivity : Activity
 	{
-        public static readonly string TAG = "EventActivity";
+        public static readonly string TAG = "EntryActivity";
 
+		Entry entry;
         EntryType entryType;
         List<Account> entryTypeList;
         DateTime entryDate;
@@ -34,7 +35,7 @@ namespace Labb02
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-			SetContentView(Resource.Layout.Event);
+			SetContentView(Resource.Layout.EntryActivity);
             // Create your application here
 
             // Run View Element setup
@@ -67,7 +68,11 @@ namespace Labb02
 
             btnDate.Click += DateSelect_OnClick;
 
-            btnAddEntry.Click += delegate { ValidateData(); };
+            btnAddEntry.Click += delegate {
+				entry = GenerateEntry();
+				if (!(entry == null))
+					AddEntry(entry); 
+			};
 
             SetModeIncome();
 
@@ -157,7 +162,6 @@ namespace Labb02
 
         private Account GetAccountFromSpinner(Spinner spin, List<Account> list)
         {
-			Log.Debug(TAG, "HELVETET: " + spin.Adapter.GetItem(spin.SelectedItemPosition).GetType());
             string text = spin.SelectedItem.ToString();
             string[] textData = text.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             try
@@ -194,26 +198,60 @@ namespace Labb02
             return find.ToList<TaxRate>()[0];
         }
 
-        private void ValidateData()
+        private bool ValidateData()
         {
-            Entry e = new Entry();
-            e.Type = entryType;
-            e.Date = entryDate;
-            e.Description = etDescription.Text;
-			var bajs = spinAccount.SelectedItem;
-			Log.Debug(TAG, "För helvete: " + bajs);
-			//e.AccountType = spinType.Adapter.G
-			//Account ass = spinAccount.GetItemAtPosition(spinAccount.SelectedItemPosition);
-            e.AccountType = GetAccountFromSpinner(spinType, entryTypeList);
-            e.AccountTarget = GetAccountFromSpinner(spinAccount, BookkeeperManager.Instance.MoneyAccounts);
-            e.SumTotal = Convert.ToInt32(etTotalSum.Text);
-            e.VAT = GetTaxRateFromSpinner();
+			string message = "";
+			bool valid = true;
+			if (etDescription.Text.Length == 0)
+			{
+				message = GetString(Resource.String.eventToastErrorDescription);
+				valid = false;
+			}
+			else
+			{
+				try
+				{
+					Convert.ToInt32(etTotalSum.Text);
+				}
+				catch
+				{
+					message = GetString(Resource.String.eventToastErrorSum);
+					valid = false;
+				}
+			}
+			if (!valid)
+			{
+				Toast.MakeText(this, message, ToastLength.Long).Show();
+			}
+			return valid;
         }
 
-        private void AddEntry(Entry entry)
-        {
+		private Entry GenerateEntry()
+		{
+			if (ValidateData())
+			{
+				Entry e = new Entry();
+				e.Type = entryType;
+				e.Date = entryDate;
+				e.Description = etDescription.Text;
+				e.AccountType = GetAccountFromSpinner(spinType, entryTypeList);
+				e.AccountTarget = GetAccountFromSpinner(spinAccount, BookkeeperManager.Instance.MoneyAccounts);
+				e.SumTotal = Convert.ToInt32(etTotalSum.Text);
+				e.VAT = GetTaxRateFromSpinner();
 
-        }
+				Log.Debug(TAG, "Generating Entry:\n" + e);
+				return e;
+			}
+			return null;
+		}
+
+        private void AddEntry(Entry e)
+        {
+			BookkeeperManager.Instance.AddEntry(e);
+			string message = GetString(Resource.String.eventToastEntryAdded);
+			Toast.MakeText(this, message, ToastLength.Long).Show();
+			Finish();
+		}
 
     }
 

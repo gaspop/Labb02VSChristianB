@@ -17,4 +17,9 @@
     <string name="eventTotalSumVAT">Totalt belopp (inkl. moms):</string>
     <string name="eventTotalSum">Totalt belopp (exkl. moms):</string>
     <string name="eventVAT">Moms:</string>
+
+	<string name="eventToastEntryAdded">Händelse tillagd</string>
+	<string name="eventToastErrorDescription">Du måste lämna en beskrivning</string>
+	<string name="eventToastErrorSum">Du måste skriva in ett belopp</string>
+	
 </resources>

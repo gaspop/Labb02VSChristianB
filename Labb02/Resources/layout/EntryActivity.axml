@@ -70,6 +70,7 @@
                 android:inputType="text"
                 android:imeOptions="actionDone"
                 android:maxLength="80"
+                android:hint="Skriv här"
                 android:textSize="@dimen/event_column_label_text_size"
                 android:id="@+id/etDescription" />
         </LinearLayout>
@@ -141,6 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
+                android:imeOptions="actionDone"
                 android:textSize="@dimen/event_column_data_text_size"
                 android:id="@+id/etTotalSum" />
         </LinearLayout>
