@@ -13,7 +13,7 @@ using Java.Lang;
 
 namespace Labb02.Model
 {
-    class EntryAdapter : BaseAdapter
+    class EntryAdapter : BaseAdapter<Entry>
     {
         Activity activity;
         List<Entry> list;
@@ -32,9 +32,9 @@ namespace Labb02.Model
             }
         }
 
-        public override Java.Lang.Object GetItem(int position)
+        public override Entry GetItem(int position)
         {
-            return null;
+            return list[position];
         }
 
         public override long GetItemId(int position)
