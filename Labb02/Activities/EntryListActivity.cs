@@ -10,11 +10,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using Labb02.Model;
+
 namespace Labb02
 {
 	[Activity(Label = "EntryListActivity")]
 	public class EntryListActivity : Activity
 	{
+        ListView lvEntries;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -22,6 +25,9 @@ namespace Labb02
 
 			// Create your application here
 			SetContentView(Resource.Layout.EntryListActivity);
+            EntryAdapter adapter = new EntryAdapter(this);
+            lvEntries = FindViewById<ListView>(Resource.Id.lvEntries);
+            lvEntries.Adapter = adapter;
 		}
 	}
 }
