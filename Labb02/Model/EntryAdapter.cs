@@ -47,9 +47,9 @@ namespace Labb02.Model
             View view = convertView ?? activity.LayoutInflater.Inflate(Resource.Layout.EntryListItem, parent, false);
             
             /*
-            var view = convertView;
+            View view = convertView;
             if(view == null) {
-                view = activity.LayoutInflater.Inflate (Resource.Layout.EntryListItem, null);
+                view = activity.LayoutInflater.Inflate (Resource.Layout.EntryListItem, parent, false);
             }
             */
             TextView tvDate = view.FindViewById<TextView>(Resource.Id.entryItemDate);
