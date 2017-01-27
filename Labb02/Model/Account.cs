@@ -10,18 +10,23 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using SQLite;
+
 namespace Labb02.Model
 {
+	public enum AccountType
+	{
+		Income = 1,
+		Expense = 2,
+		Money = 3,
+	}
+
     public class Account
     {
-        public string Name { get; }
-        public int Number { get; }
-
-        public Account (string name, int number)
-        {
-            Name = name;
-            Number = number;
-        }
+		[PrimaryKey, Column("_id")]
+		public int Number { get; set; }
+		public string Name { get; set; }
+		public AccountType Type { get; set; }
 
         public override string ToString()
         {

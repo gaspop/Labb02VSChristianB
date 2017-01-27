@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using SQLite;
+
 namespace Labb02.Model
 {
 
@@ -17,13 +19,15 @@ namespace Labb02.Model
 
 	public class Entry
     {
+		[PrimaryKey, AutoIncrement, Column("_id")]
+		public int Id { get; private set; }
         public EntryType Type { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
-        public Account AccountType { get; set; }
-        public Account AccountTarget { get; set; }
+        public int AccountType { get; set; }
+        public int AccountTarget { get; set; }
         public int SumTotal { get; set; }
-        public TaxRate VAT { get; set; }
+        public int Rate { get; set; }
 
 		public override string ToString()
 		{
@@ -33,7 +37,7 @@ namespace Labb02.Model
 			s += "\n" + "Account Type: " + AccountType;
 			s += "\n" + "Account Target: " + AccountTarget;
 			s += "\n" + "Sum Total: " + SumTotal;
-			s += "\n" + "Tax Rate: " + VAT;
+			s += "\n" + "Tax Rate: " + Rate;
 
 			return s;
 		}

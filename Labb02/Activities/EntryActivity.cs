@@ -161,33 +161,35 @@ namespace Labb02
         }
 
 
-        private Account GetAccountFromSpinner(Spinner spin, List<Account> list)
+        private int GetAccountFromSpinner(Spinner spin, List<Account> list)
         {
             string text = spin.SelectedItem.ToString();
-            string[] textData = text.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+			int textIndex = text.IndexOf(':');
+			string textData = text.Substring(0, text.Length - (text.Length - textIndex));
+            //string[] textData = text.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             try
             {
-                int dataId = Convert.ToInt32(textData[0]);
+                int dataId = Convert.ToInt32(textData);
                 var find = list.Where(a => a.Number == dataId).ToList<Account>();
                 if (find.Count == 0)
                 {
                     Log.Debug(TAG, "GetAccountFromSpinner: No match");
-                    return null;
+                    return 0;
                 }
                 else
                 {
                     Log.Debug(TAG, "GetAccountFromSpinner: Returning '" + find[0] +"'");
-                    return find[0];
+					return find[0].Number;
                 }
             }
             catch
             {
                 Log.Debug(TAG, "GetAccountFromSpinner: Error!");
-                return null;
+                return 0;
             }
         }
 
-        private TaxRate GetTaxRateFromSpinner()
+        private int GetTaxRateFromSpinner()
         {
             string text = spinVAT.SelectedItem.ToString();
             int i = text.IndexOf('%');
@@ -196,7 +198,7 @@ namespace Labb02
             var find = BookkeeperManager.Instance.TaxRates.Where(t => t.Rate == data);
 
             Log.Debug(TAG, "GetTaxRateFromSpinner: Returning '" + find.ToList<TaxRate>()[0] + "'");
-            return find.ToList<TaxRate>()[0];
+			return find.ToList<TaxRate>()[0].Id;
         }
 
         private bool ValidateData()
@@ -238,7 +240,7 @@ namespace Labb02
 				e.AccountType = GetAccountFromSpinner(spinType, entryTypeList);
 				e.AccountTarget = GetAccountFromSpinner(spinAccount, BookkeeperManager.Instance.MoneyAccounts);
 				e.SumTotal = Convert.ToInt32(etTotalSum.Text);
-				e.VAT = GetTaxRateFromSpinner();
+				e.Rate = GetTaxRateFromSpinner();
 
 				Log.Debug(TAG, "Generating Entry:\n" + e);
 				return e;

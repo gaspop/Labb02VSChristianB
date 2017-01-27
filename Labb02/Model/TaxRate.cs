@@ -10,17 +10,16 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using SQLite;
+
 namespace Labb02.Model
 {
+	
     public class TaxRate
     {
-
-        public float Rate { get; }
-
-        public TaxRate (float rate)
-        {
-            Rate = rate;
-        }
+		[PrimaryKey, AutoIncrement, Column("_id")]
+		public int Id { get; private set; }
+		public float Rate { get; set; }
 
         public override string ToString()
         {
