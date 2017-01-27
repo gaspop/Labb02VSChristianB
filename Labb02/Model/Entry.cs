@@ -17,7 +17,7 @@ namespace Labb02.Model
 
     public enum EntryType { Income = 1 , Expense = 2 }
 
-	public class Entry
+	public class Entry : Java.Lang.Object
     {
 		[PrimaryKey, AutoIncrement, Column("_id")]
 		public int Id { get; private set; }

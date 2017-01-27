@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Graphics;
 using Java.Lang;
 
 namespace Labb02.Model
@@ -21,7 +22,7 @@ namespace Labb02.Model
         public EntryAdapter(Activity activity)
         {
             this.activity = activity;
-            list = BookkeeperManager.Instance.Entries;
+			list = BookkeeperManager.Instance.Entries.OrderBy(e => e.Date).ToList();
         }
 
 		public override Entry this[int position]
@@ -37,14 +38,6 @@ namespace Labb02.Model
             }
         }
 
-
-		/*
-        public override Entry this(int position)
-        {
-			get { return list[position]; }
-        }
-        */
-
         public override long GetItemId(int position)
         {
             return position;
@@ -55,6 +48,7 @@ namespace Labb02.Model
             View view = convertView ?? activity.LayoutInflater.Inflate(Resource.Layout.EntryListItem, parent, false);
             
             /*
+			get { return list[position]; }
             View view = convertView;
             if(view == null) {
                 view = activity.LayoutInflater.Inflate (Resource.Layout.EntryListItem, parent, false);
@@ -69,7 +63,13 @@ namespace Labb02.Model
             tvDescription.Text = entry.Description;
             tvSum.Text = entry.SumTotal + " kr";
 
+			if (entry.Type == EntryType.Income)
+				tvSum.SetTextColor(new Color(76, 175, 80));
+			else
+				tvSum.SetTextColor(new Color(211, 47, 47));
+
             return view;
-        }
+		}
+
     }
 }

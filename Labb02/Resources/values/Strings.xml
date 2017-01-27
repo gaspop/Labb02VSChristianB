@@ -6,8 +6,10 @@
 	<string name="mainMenuShowAllEvents">Visa alla händelser</string>
 	<string name="mainMenuCreateReports">Skapa rapporter</string>
 
-	<string name="eventInstructions">Här kan du lägga till nya händelser, antingen inkomster eller utgifter</string>
+	<string name="eventInstructions">Här kan du lägga till nya händelser, antingen inkomster eller utgifter.</string>
+	<string name="eventEditInstructions">Här kan du redigera den aktuella händelsen.</string>
     <string name="eventAddEvent">Lägg till händelse</string>
+    <string name="eventUpdateEvent">Uppdatera händelse</string>
     <string name="eventIncome">Inkomst</string>
     <string name="eventExpense">Utgift</string>
     <string name="eventDate">Datum:</string>
@@ -19,6 +21,7 @@
     <string name="eventVAT">Moms:</string>
 
 	<string name="eventToastEntryAdded">Händelse tillagd</string>
+	<string name="eventToastEntryUpdated">Händelse uppdaterad</string>
 	<string name="eventToastErrorDescription">Du måste lämna en beskrivning</string>
 	<string name="eventToastErrorSum">Du måste skriva in ett belopp</string>
 	

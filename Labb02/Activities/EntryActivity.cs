@@ -21,6 +21,11 @@ namespace Labb02
 	{
         public static readonly string TAG = "EntryActivity";
 
+		bool modeEdit;
+		int entryEditId;
+		Entry entryEdit;
+		BookkeeperManager manager = BookkeeperManager.Instance;
+
 		Entry entry;
         EntryType entryType;
         List<Account> entryTypeList;
@@ -29,14 +34,16 @@ namespace Labb02
         Button btnDate, btnAddEntry;
         RadioButton radSetIncome, radSetExpense;
         EditText etDescription, etTotalSum;
-        TextView tvTotalSum;
+        TextView tvDescription, tvTotalSum;
         Spinner spinType, spinAccount, spinVAT;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.EntryActivity);
-            // Create your application here
+			// Create your application here
+
+			//modeEdit = Intent.GetBooleanExtra("EXTRA_EDIT", false);
 
             // Run View Element setup
             InstantiateViews();
@@ -44,6 +51,15 @@ namespace Labb02
             SetupRadioButtons();
             SetupAccountSpinner(spinAccount, BookkeeperManager.Instance.MoneyAccounts);
             SetupTaxRateSpinner();
+
+			// Run Edit Mode
+			if (modeEdit = Intent.GetBooleanExtra("EXTRA_EDIT", false))
+			{
+				entryEditId = Intent.GetIntExtra("EXTRA_ID", 0);
+				Log.Debug(TAG, "ID retrieved: " + Intent.GetIntExtra("EXTRA_ID", 0));
+				SetupEditMode();
+			}
+
         }
 
         private void InstantiateViews()
@@ -52,13 +68,48 @@ namespace Labb02
             btnAddEntry = FindViewById<Button>(Resource.Id.btnAddEvent);
             radSetIncome = FindViewById<RadioButton>(Resource.Id.radSetIncome);
             radSetExpense = FindViewById<RadioButton>(Resource.Id.radSetExpense);
-            etDescription = FindViewById<EditText>(Resource.Id.etDescription);
+			tvDescription = FindViewById<TextView>(Resource.Id.tvDescription);
+			tvTotalSum = FindViewById<TextView>(Resource.Id.tvTotalSum);
+			etDescription = FindViewById<EditText>(Resource.Id.etDescription);
             etTotalSum = FindViewById<EditText>(Resource.Id.etTotalSum);
-            tvTotalSum = FindViewById<TextView>(Resource.Id.tvTotalSum);
             spinType = FindViewById<Spinner>(Resource.Id.spinType);
             spinAccount = FindViewById<Spinner>(Resource.Id.spinAccount);
             spinVAT = FindViewById<Spinner>(Resource.Id.spinVAT);
         }
+
+		private int GetAccountNumberIndex(int number, List<Account> list)
+		{
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (list[i].Number == number)
+					return i;
+			}
+			return 0;
+		}
+
+		private void SetupEditMode()
+		{
+			tvDescription.Text = GetString(Resource.String.eventEditInstructions);
+			btnAddEntry.Text = GetString(Resource.String.eventUpdateEvent);
+			entryEdit = manager.Entries.Where(e => e.Id == entryEditId).ToList()[0];
+			entryType = entryEdit.Type;
+			UpdateDate(entryEdit.Date);
+			etDescription.Text = entryEdit.Description;
+			if (entryType == EntryType.Income)
+			{
+				SetModeIncome();
+				spinType.SetSelection(GetAccountNumberIndex(entryEdit.AccountType, manager.IncomeAccounts));
+			}
+			else
+			{
+				SetModeExpense();
+				spinType.SetSelection(GetAccountNumberIndex(entryEdit.AccountType, manager.ExpenseAccounts));
+			}
+			spinAccount.SetSelection(GetAccountNumberIndex(entryEdit.AccountTarget, manager.MoneyAccounts));
+			etTotalSum.Text = string.Format("{0}",entryEdit.SumTotal);
+			spinVAT.SetSelection(entryEdit.Rate -1);
+			UpdateTotalSum();
+		}
 
         private void SetupViews()
         {
@@ -71,7 +122,12 @@ namespace Labb02
             btnAddEntry.Click += delegate {
 				entry = GenerateEntry();
 				if (!(entry == null))
-					AddEntry(entry); 
+				{
+					if (modeEdit)
+						UpdateEntry();
+					else
+						AddEntry(entry);
+				}
 			};
 
             SetModeIncome();
@@ -147,7 +203,7 @@ namespace Labb02
 
         private void UpdateTotalSum()
         {
-            TaxRate t = BookkeeperManager.Instance.TaxRates[spinVAT.SelectedItemPosition];
+            TaxRate t = manager.TaxRates[spinVAT.SelectedItemPosition];
             try
             {
                 double sum = Convert.ToDouble(etTotalSum.Text);
@@ -191,14 +247,7 @@ namespace Labb02
 
         private int GetTaxRateFromSpinner()
         {
-            string text = spinVAT.SelectedItem.ToString();
-            int i = text.IndexOf('%');
-            string sub = text.Substring(0,text.Length - (text.Length - i));
-			float data = (float) Convert.ToDouble(sub) / 100;
-            var find = BookkeeperManager.Instance.TaxRates.Where(t => t.Rate == data);
-
-            Log.Debug(TAG, "GetTaxRateFromSpinner: Returning '" + find.ToList<TaxRate>()[0] + "'");
-			return find.ToList<TaxRate>()[0].Id;
+			return manager.TaxRates[spinVAT.SelectedItemPosition].Id;
         }
 
         private bool ValidateData()
@@ -238,7 +287,7 @@ namespace Labb02
 				e.Date = entryDate;
 				e.Description = etDescription.Text;
 				e.AccountType = GetAccountFromSpinner(spinType, entryTypeList);
-				e.AccountTarget = GetAccountFromSpinner(spinAccount, BookkeeperManager.Instance.MoneyAccounts);
+				e.AccountTarget = GetAccountFromSpinner(spinAccount, manager.MoneyAccounts);
 				e.SumTotal = Convert.ToInt32(etTotalSum.Text);
 				e.Rate = GetTaxRateFromSpinner();
 
@@ -250,12 +299,28 @@ namespace Labb02
 
         private void AddEntry(Entry e)
         {
-			BookkeeperManager.Instance.AddEntry(e);
+			manager.AddEntry(e);
 			string message = GetString(Resource.String.eventToastEntryAdded);
 			Toast.MakeText(this, message, ToastLength.Long).Show();
 			Finish();
 		}
 
+		private void UpdateEntry()
+		{
+			entryEdit.Type = entry.Type;
+			entryEdit.Date = entry.Date;
+			entryEdit.Description = entry.Description;
+			entryEdit.AccountType = entry.AccountType;
+			entryEdit.AccountTarget = entry.AccountTarget;
+			entryEdit.SumTotal = entry.SumTotal;
+			entryEdit.Rate = entry.Rate;
+
+			manager.UpdateEntry(entryEdit);
+
+			string message = GetString(Resource.String.eventToastEntryUpdated);
+			Toast.MakeText(this, message, ToastLength.Long).Show();
+			Finish();
+		}
     }
 
 
