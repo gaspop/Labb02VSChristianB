@@ -13,7 +13,7 @@ using Java.Lang;
 
 namespace Labb02.Model
 {
-    class EntryAdapter : BaseAdapter<Entry>
+    class EntryAdapter: BaseAdapter<Entry>
     {
         Activity activity;
         List<Entry> list;
@@ -24,7 +24,12 @@ namespace Labb02.Model
             list = BookkeeperManager.Instance.Entries;
         }
 
-        public override int Count
+		public override Entry this[int position]
+		{
+			get { return list[position]; }
+		}
+
+		public override int Count
         {
             get
             {
@@ -32,10 +37,13 @@ namespace Labb02.Model
             }
         }
 
-        public override Entry GetItem(int position)
+
+		/*
+        public override Entry this(int position)
         {
-            return list[position];
+			get { return list[position]; }
         }
+        */
 
         public override long GetItemId(int position)
         {

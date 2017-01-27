@@ -101,6 +101,7 @@ namespace Labb02
             ArrayAdapter adapter = new ArrayAdapter<TaxRate>(this, Resource.Layout.SpinnerItem, list);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinVAT.Adapter = adapter;
+			spinVAT.ItemSelected += delegate { UpdateTotalSum(); };
         }
 
         /*
@@ -150,8 +151,8 @@ namespace Labb02
             try
             {
                 double sum = Convert.ToDouble(etTotalSum.Text);
-                sum *= 1.0 - ((double) t.VAT/100);
-                tvTotalSum.Text = String.Format("{0} :-",sum);
+				sum /= (1.0 + t.Rate);
+				tvTotalSum.Text = String.Format("{0}",Math.Round(sum));
             }
             catch
             {
@@ -191,8 +192,8 @@ namespace Labb02
             string text = spinVAT.SelectedItem.ToString();
             int i = text.IndexOf('%');
             string sub = text.Substring(0,text.Length - (text.Length - i));
-            int data = Convert.ToInt32(sub);
-            var find = BookkeeperManager.Instance.TaxRates.Where(t => t.VAT == data);
+			float data = (float) Convert.ToDouble(sub) / 100;
+            var find = BookkeeperManager.Instance.TaxRates.Where(t => t.Rate == data);
 
             Log.Debug(TAG, "GetTaxRateFromSpinner: Returning '" + find.ToList<TaxRate>()[0] + "'");
             return find.ToList<TaxRate>()[0];

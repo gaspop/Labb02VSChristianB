@@ -15,7 +15,7 @@ namespace Labb02.Model
 
     public enum EntryType { Income = 1 , Expense = 2 }
 
-    public class Entry
+	public class Entry
     {
         public EntryType Type { get; set; }
         public DateTime Date { get; set; }

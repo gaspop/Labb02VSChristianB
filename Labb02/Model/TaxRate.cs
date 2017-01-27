@@ -15,16 +15,16 @@ namespace Labb02.Model
     public class TaxRate
     {
 
-        public int VAT { get; }
+        public float Rate { get; }
 
-        public TaxRate (int vat)
+        public TaxRate (float rate)
         {
-            VAT = vat;
+            Rate = rate;
         }
 
         public override string ToString()
         {
-            return VAT + "%";
+			return (Rate * 100) + "%";
         }
 
     }
