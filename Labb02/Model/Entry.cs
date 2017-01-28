@@ -27,7 +27,7 @@ namespace Labb02.Model
         public int AccountType { get; set; }
         public int AccountTarget { get; set; }
         public int SumTotal { get; set; }
-        public int Rate { get; set; }
+        public float Rate { get; set; }
 
 		public override string ToString()
 		{

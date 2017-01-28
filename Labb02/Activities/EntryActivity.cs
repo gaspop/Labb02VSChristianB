@@ -47,7 +47,7 @@ namespace Labb02
             InstantiateViews();
             SetupViews();
             SetupRadioButtons();
-            SetupAccountSpinner(spinAccount, BookkeeperManager.Instance.MoneyAccounts);
+            SetupAccountSpinner(spinAccount, manager.MoneyAccounts);
             SetupTaxRateSpinner();
 
 			// Run Edit Mode
@@ -85,6 +85,19 @@ namespace Labb02
 			return 0;
 		}
 
+		private int GetTaxRateIndex()
+		{
+			Log.Debug(TAG, "GetTaxRateIndex:");
+			List<TaxRate> list = manager.TaxRates;
+			for (int i = 0; i < list.Count; i++)
+			{
+				Log.Debug(TAG, "List Rate: " + list[i].Rate + " vs. " + entryEdit.Rate);
+				if (list[i].Rate == entryEdit.Rate)
+					return i;
+			}
+			return 0;
+		}
+
 		private void SetupEditMode()
 		{
 			this.SetTitle(Resource.String.activityLabelEntryEdit);
@@ -106,7 +119,7 @@ namespace Labb02
 			}
 			spinAccount.SetSelection(GetAccountNumberIndex(entryEdit.AccountTarget, manager.MoneyAccounts));
 			etTotalSum.Text = string.Format("{0}",entryEdit.SumTotal);
-			spinVAT.SetSelection(entryEdit.Rate -1);
+			spinVAT.SetSelection(GetTaxRateIndex());
 			UpdateTotalSum();
 		}
 
@@ -152,7 +165,7 @@ namespace Labb02
 
         private void SetupTaxRateSpinner()
         {
-            List<TaxRate> list = BookkeeperManager.Instance.TaxRates;
+            List<TaxRate> list = manager.TaxRates;
             ArrayAdapter adapter = new ArrayAdapter<TaxRate>(this, Resource.Layout.SpinnerItem, list);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinVAT.Adapter = adapter;
@@ -181,21 +194,20 @@ namespace Labb02
         {
             radSetIncome.Checked = true;
             entryType = EntryType.Income;
-            entryTypeList = BookkeeperManager.Instance.IncomeAccounts;
-            SetupAccountSpinner(spinType, BookkeeperManager.Instance.IncomeAccounts);
+            entryTypeList = manager.IncomeAccounts;
+            SetupAccountSpinner(spinType, entryTypeList);
         }
 
         private void SetModeExpense()
         {
             radSetExpense.Checked = true;
             entryType = EntryType.Expense;
-            entryTypeList = BookkeeperManager.Instance.ExpenseAccounts;
-            SetupAccountSpinner(spinType, BookkeeperManager.Instance.ExpenseAccounts);
+            entryTypeList = manager.ExpenseAccounts;
+            SetupAccountSpinner(spinType, entryTypeList);
         }
 
         private void UpdateDate(DateTime newDate)
         {
-            Log.Debug(TAG, "Updating date: " + newDate.ToLongDateString());
             entryDate = newDate;
             btnDate.Text = entryDate.ToString("yyyy-MM-dd");
         }
@@ -216,26 +228,16 @@ namespace Labb02
         }
 
 
-        private int GetAccountFromSpinner(Spinner spin, List<Account> list)
+        private int GetAccountFromSpinner(Spinner spin)
         {
             string text = spin.SelectedItem.ToString();
 			int textIndex = text.IndexOf(':');
 			string textData = text.Substring(0, text.Length - (text.Length - textIndex));
-            //string[] textData = text.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             try
             {
-                int dataId = Convert.ToInt32(textData);
-                var find = list.Where(a => a.Number == dataId).ToList<Account>();
-                if (find.Count == 0)
-                {
-                    Log.Debug(TAG, "GetAccountFromSpinner: No match");
-                    return 0;
-                }
-                else
-                {
-                    Log.Debug(TAG, "GetAccountFromSpinner: Returning '" + find[0] +"'");
-					return find[0].Number;
-                }
+                int number = Convert.ToInt32(textData);
+				Log.Debug(TAG, "GetAccountFromSpinner: Returning '" + number + "'");
+				return number;
             }
             catch
             {
@@ -244,9 +246,9 @@ namespace Labb02
             }
         }
 
-        private int GetTaxRateFromSpinner()
+        private float GetTaxRateFromSpinner()
         {
-			return manager.TaxRates[spinVAT.SelectedItemPosition].Id;
+			return manager.TaxRates[spinVAT.SelectedItemPosition].Rate;
         }
 
         private bool ValidateData()
@@ -285,8 +287,8 @@ namespace Labb02
 				e.Type = entryType;
 				e.Date = entryDate;
 				e.Description = etDescription.Text;
-				e.AccountType = GetAccountFromSpinner(spinType, entryTypeList);
-				e.AccountTarget = GetAccountFromSpinner(spinAccount, manager.MoneyAccounts);
+				e.AccountType = GetAccountFromSpinner(spinType);
+				e.AccountTarget = GetAccountFromSpinner(spinAccount);
 				e.SumTotal = Convert.ToInt32(etTotalSum.Text);
 				e.Rate = GetTaxRateFromSpinner();
 
