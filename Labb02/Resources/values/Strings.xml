@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ApplicationName">Bookkeeper</string>
+
+	<string name="activityLabelMain">Huvudmeny</string>
+	<string name="activityLabelEntryAdd">Lägg till händelse</string>
+	<string name="activityLabelEntryEdit">Redigera händelse</string>
+	<string name="activityLabelEntryList">Händelser</string>
+	<string name="activityLabelCreateReport">Skapa rapport</string>
+	<string name="activityLabelTaxReport">Momsrapport</string>
+	
 	<string name="mainMenuHeader">Välj alternativ</string>
 	<string name="mainMenuNewEvent">Ny händelse</string>
 	<string name="mainMenuShowAllEvents">Visa alla händelser</string>
@@ -25,7 +33,7 @@
 	<string name="eventToastErrorDescription">Du måste lämna en beskrivning</string>
 	<string name="eventToastErrorSum">Du måste skriva in ett belopp</string>
 
-	<string name="reportHeader">Skapa rapport</string>
+	<string name="reportHeader">Välj alternativ</string>
 	<string name="reportAccountReport">Rapport över konton</string>
 	<string name="reportVATReport">Momsrapport</string>
 	

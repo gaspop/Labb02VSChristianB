@@ -16,7 +16,7 @@ using Labb02.Model;
 
 namespace Labb02
 {
-	[Activity(Label = "EntryActivity")]
+	[Activity(Label = "@string/activityLabelEntryAdd")]
 	public class EntryActivity : Activity
 	{
         public static readonly string TAG = "EntryActivity";
@@ -42,8 +42,6 @@ namespace Labb02
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.EntryActivity);
 			// Create your application here
-
-			//modeEdit = Intent.GetBooleanExtra("EXTRA_EDIT", false);
 
             // Run View Element setup
             InstantiateViews();
@@ -89,6 +87,7 @@ namespace Labb02
 
 		private void SetupEditMode()
 		{
+			this.SetTitle(Resource.String.activityLabelEntryEdit);
 			tvDescription.Text = GetString(Resource.String.eventEditInstructions);
 			btnAddEntry.Text = GetString(Resource.String.eventUpdateEvent);
 			entryEdit = manager.Entries.Where(e => e.Id == entryEditId).ToList()[0];

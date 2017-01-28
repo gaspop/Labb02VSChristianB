@@ -70,6 +70,7 @@
     <Compile Include="Activities\EntryActivity.cs" />
     <Compile Include="Activities\EntryListActivity.cs" />
     <Compile Include="Activities\CreateReportsActivity.cs" />
+    <Compile Include="Activities\TaxReportActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -80,6 +81,8 @@
     </AndroidResource>
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\CreateReportsActivity.axml" />
+    <AndroidResource Include="Resources\layout\TaxReportActivity.axml" />
+    <AndroidResource Include="Resources\drawable\bookkeeperIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\MainActivity.axml">

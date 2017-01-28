@@ -16,8 +16,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="false"
-        android:layout_below="@id/tvHeader"
+        android:layout_centerVertical="true"
         android:id="@+id/llMenu">
         <Button
             android:layout_width="match_parent"
@@ -30,10 +29,4 @@
             android:text="@string/reportVATReport"
             android:id="@+id/btnVATReport" />
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/llMenu"
-        android:text="Report"
-        android:id="@+id/tvReport" />
 </RelativeLayout>

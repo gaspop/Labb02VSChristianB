@@ -8,7 +8,7 @@ using Labb02.Model;
 
 namespace Labb02
 {
-    [Activity(Label = "@string/ApplicationName", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(MainLauncher = true, Icon = "@drawable/bookkeeperIcon")]
     public class MainActivity : Activity
     {
 
@@ -21,8 +21,8 @@ namespace Labb02
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
             // Set our view from the "main" layout resource
+			this.SetTitle(Resource.String.activityLabelMain);
             SetContentView (Resource.Layout.MainActivity);
 			SetupButtons();
 

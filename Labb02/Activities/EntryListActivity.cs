@@ -15,7 +15,7 @@ using Labb02.Model;
 
 namespace Labb02
 {
-	[Activity(Label = "EntryListActivity")]
+	[Activity(Label = "@string/activityLabelEntryList")]
 	public class EntryListActivity : Activity
 	{
         ListView lvEntries;
