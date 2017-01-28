@@ -10,7 +10,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
-using Java.Lang;
 
 namespace Labb02.Model
 {

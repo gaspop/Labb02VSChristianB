@@ -16,7 +16,7 @@ namespace Labb02
 
         Button btnNewEvent;
 		Button btnShowAllEvents;
-		//Button btnCreateReports;
+		Button btnCreateReports;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -24,7 +24,7 @@ namespace Labb02
 
             // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.MainActivity);
-			setupButtons();
+			SetupButtons();
 
         }
 
@@ -34,11 +34,11 @@ namespace Labb02
 			Log.Debug(TAG, BookkeeperManager.Instance.EntryToString());
 		}
 
-        private void setupButtons()
+        private void SetupButtons()
 		{
 			btnNewEvent = FindViewById<Button>(Resource.Id.btnNewEvent);
 			btnShowAllEvents = FindViewById<Button>(Resource.Id.btnShowAllEvents);
-			//btnCreateReports = FindViewById<Button>(Resource.Id.btnCreateReports);
+			btnCreateReports = FindViewById<Button>(Resource.Id.btnCreateReports);
 
 			btnNewEvent.Click += delegate
 			{
@@ -51,14 +51,12 @@ namespace Labb02
 				Intent i = new Intent(this, typeof(EntryListActivity));
 				StartActivity(i);
 			};
-            /*
+            
 			btnCreateReports.Click += delegate
 			{
-				//Intent i = new Intent(this, typeof(EntryActivity));
-				//StartActivity(i);
+				Intent i = new Intent(this, typeof(CreateReportsActivity));
+				StartActivity(i);
 			};
-            */
-
 		}
 
     }
