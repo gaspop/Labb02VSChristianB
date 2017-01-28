@@ -9,4 +9,8 @@
 		{
 			db.Insert(new Entry
 			{ 				Type = entry.Type, 				Date = entry.Date, 				Description = entry.Description, 				AccountType = entry.AccountType, 				AccountTarget = entry.AccountTarget, 				SumTotal = entry.SumTotal, 				Rate = entry.Rate
-			});         }  		public void UpdateEntry(Entry entry) 		{ 			db.Update(entry); 		}  		public string EntryToString() 		{ 			return string.Join("\n", Entries); 		}      } }
+			});         }  		public void UpdateEntry(Entry entry) 		{ 			db.Update(entry); 		}  		public string EntryToString() 		{ 			return string.Join("\n", Entries); 		}  		public string GetTaxReport() 		{ 			string report = "Momsrapport:\n\n"; 			List<TaxRate> t = TaxRates; 			var result = Entries.OrderBy(e => e.Date).Select(e =>
+							String.Format("{0}:\n{1}\nSkatt: {2}",  	                              e.Date.ToString("yyyy-MM-dd"),  	                              e.Description, 		 						  (e.Type == EntryType.Income) ?
+									 e.SumTotal - Math.Round(e.SumTotal / (1.0 + t[e.Rate-1].Rate)) 			 						:
+									 (e.SumTotal - Math.Round(e.SumTotal / (1.0 + t[e.Rate - 1].Rate))) * (-1)
+			                                      )); 			report += string.Join("\n\n", result); 			// 			return report; 		}      } }

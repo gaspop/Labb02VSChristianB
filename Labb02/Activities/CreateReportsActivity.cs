@@ -11,6 +11,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using Labb02.Model;
+
 namespace Labb02
 {
 	[Activity(Label = "CreateReportsActivity")]
@@ -19,6 +21,7 @@ namespace Labb02
 
 		Button btnAccountReport;
 		Button btnVATReport;
+		TextView tvReport;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -26,6 +29,8 @@ namespace Labb02
 
 			// Create your application here
 			SetContentView(Resource.Layout.CreateReportsActivity);
+
+			tvReport = FindViewById<TextView>(Resource.Id.tvReport);
 			SetupButtons();
 		}
 
@@ -34,13 +39,12 @@ namespace Labb02
 			btnAccountReport = FindViewById<Button>(Resource.Id.btnAccountReport);
 			btnAccountReport.Click += delegate
 			{
-
 			};
 
 			btnVATReport = FindViewById<Button>(Resource.Id.btnVATReport);
 			btnVATReport.Click += delegate
 			{
-
+				tvReport.Text = BookkeeperManager.Instance.GetTaxReport();
 			};
 		}
 	}
