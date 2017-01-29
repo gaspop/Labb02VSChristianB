@@ -70,7 +70,10 @@ namespace Labb02.Model
 			}
 			tvSum.Text = SumTotal + " kr";
 
-			return view;
+            view.SetBackgroundColor
+              (position % 2 == 1 ? new Color(64,64,64) : view.DrawingCacheBackgroundColor);
+
+            return view;
 		}
 
 		public TableRow NewTableRow(Entry e)
