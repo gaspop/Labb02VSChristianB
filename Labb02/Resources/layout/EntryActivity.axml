@@ -10,10 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            style="@android:style/TextAppearance.Small"
             android:layout_weight="3"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_centerHorizontal="true"
+            android:textStyle="bold"
             android:text="@string/eventInstructions"
             android:id="@+id/tvDescription" />
         <RadioGroup
@@ -22,15 +24,19 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <RadioButton
+                style="@android:style/TextAppearance.Medium"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="@string/eventIncome"
                 android:id="@+id/radSetIncome" />
             <RadioButton
+                style="@android:style/TextAppearance.Medium"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="@string/eventExpense"
                 android:id="@+id/radSetExpense" />
         </RadioGroup>
@@ -40,16 +46,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_label_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/event_column_label_text_size"
+                android:textStyle="bold"
                 android:text="@string/eventDate" />
             <Button
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_data_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/event_column_data_text_size"
+                android:textStyle="bold"
                 android:id="@+id/btnDate" />
         </LinearLayout>
         <LinearLayout
@@ -58,12 +66,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_label_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/event_column_label_text_size"
+                android:textStyle="bold"
                 android:text="@string/eventDescription" />
             <EditText
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_data_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -71,7 +81,6 @@
                 android:imeOptions="actionDone"
                 android:maxLength="80"
                 android:hint="Skriv här"
-                android:textSize="@dimen/event_column_label_text_size"
                 android:id="@+id/etDescription" />
         </LinearLayout>
         <LinearLayout
@@ -80,10 +89,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_label_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/event_column_label_text_size"
+                android:textStyle="bold"
                 android:text="@string/eventType" />
             <Spinner
                 android:layout_weight="@integer/event_column_data_weight"
@@ -97,10 +107,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_label_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/event_column_label_text_size"
+                android:textStyle="bold"
                 android:text="@string/eventToFromAccount" />
             <Spinner
                 android:layout_weight="@integer/event_column_data_weight"
@@ -114,16 +125,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_label_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/event_column_label_text_size"
+                android:textStyle="bold"
                 android:text="@string/eventTotalSum" />
             <TextView
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_data_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/event_column_data_text_size"
                 android:id="@+id/tvTotalSum" />
         </LinearLayout>
         <LinearLayout
@@ -132,18 +144,19 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_label_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/event_column_label_text_size"
+                android:textStyle="bold"
                 android:text="@string/eventTotalSumVAT" />
             <EditText
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_data_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:imeOptions="actionDone"
-                android:textSize="@dimen/event_column_data_text_size"
                 android:id="@+id/etTotalSum" />
         </LinearLayout>
         <LinearLayout
@@ -152,10 +165,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
+                style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_label_weight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/event_column_label_text_size"
+                android:textStyle="bold"
                 android:text="@string/eventVAT" />
             <Spinner
                 android:layout_weight="@integer/event_column_data_weight"
@@ -168,10 +182,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <Button
+                style="@android:style/TextAppearance.Small"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
+                android:textStyle="bold"
                 android:text="@string/eventAddEvent"
                 android:id="@+id/btnAddEvent" />
         </RelativeLayout>

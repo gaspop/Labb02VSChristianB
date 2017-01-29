@@ -5,10 +5,10 @@
     android:padding="16dp"
     android:id="@+id/rlRoot">
     <TextView
+        style="@android:style/TextAppearance.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textSize="30sp"
         android:text="@string/mainMenuHeader"
         android:id="@+id/tvHeader" />
     <LinearLayout

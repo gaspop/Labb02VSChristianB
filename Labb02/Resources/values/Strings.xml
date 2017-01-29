@@ -7,6 +7,7 @@
 	<string name="activityLabelEntryEdit">Redigera händelse</string>
 	<string name="activityLabelEntryList">Händelser</string>
 	<string name="activityLabelCreateReport">Skapa rapport</string>
+	<string name="activityLabelAccountReport">Rapport över konton</string>
 	<string name="activityLabelTaxReport">Momsrapport</string>
 	
 	<string name="mainMenuHeader">Välj alternativ</string>
@@ -24,8 +25,8 @@
     <string name="eventDescription">Beskrivning:</string>
     <string name="eventType">Typ:</string>
     <string name="eventToFromAccount">Till/från konto:</string>
-    <string name="eventTotalSumVAT">Totalt belopp (inkl. moms):</string>
-    <string name="eventTotalSum">Totalt belopp (exkl. moms):</string>
+    <string name="eventTotalSumVAT">Belopp (inkl. moms):</string>
+    <string name="eventTotalSum">Belopp (exkl. moms):</string>
     <string name="eventVAT">Moms:</string>
 
 	<string name="eventToastEntryAdded">Händelse tillagd</string>
@@ -36,5 +37,8 @@
 	<string name="reportHeader">Välj alternativ</string>
 	<string name="reportAccountReport">Rapport över konton</string>
 	<string name="reportVATReport">Momsrapport</string>
+
+	<string name="accountReportAccount">Konto:</string>
+	<string name="accountReportTotalSum">Totalt belopp:</string>
 	
 </resources>

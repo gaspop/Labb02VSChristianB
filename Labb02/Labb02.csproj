@@ -71,6 +71,8 @@
     <Compile Include="Activities\EntryListActivity.cs" />
     <Compile Include="Activities\CreateReportsActivity.cs" />
     <Compile Include="Activities\TaxReportActivity.cs" />
+    <Compile Include="Activities\AccountReportActivity.cs" />
+    <Compile Include="Model\AccountAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -83,6 +85,9 @@
     <AndroidResource Include="Resources\layout\CreateReportsActivity.axml" />
     <AndroidResource Include="Resources\layout\TaxReportActivity.axml" />
     <AndroidResource Include="Resources\drawable\bookkeeperIcon.png" />
+    <AndroidResource Include="Resources\layout\AccountReportActivity.axml" />
+    <AndroidResource Include="Resources\layout\AccountReportTableRow.axml" />
+    <AndroidResource Include="Resources\layout\AccountReportItem.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\MainActivity.axml">
@@ -107,7 +112,7 @@
     <AndroidResource Include="Resources\values\Dimens.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\SpinnerItem.xml" />
+    <AndroidResource Include="Resources\layout\EntrySpinnerItem.xml" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">

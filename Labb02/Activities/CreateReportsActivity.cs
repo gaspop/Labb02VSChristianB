@@ -36,6 +36,8 @@ namespace Labb02
 			btnAccountReport = FindViewById<Button>(Resource.Id.btnAccountReport);
 			btnAccountReport.Click += delegate
 			{
+				Intent i = new Intent(this, typeof(AccountReportActivity));
+				StartActivity(i);
 			};
 
 			btnVATReport = FindViewById<Button>(Resource.Id.btnVATReport);

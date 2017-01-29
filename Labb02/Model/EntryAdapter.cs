@@ -45,14 +45,7 @@ namespace Labb02.Model
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View view = convertView ?? activity.LayoutInflater.Inflate(Resource.Layout.EntryListItem, parent, false);
-            
-            /*
-			get { return list[position]; }
-            View view = convertView;
-            if(view == null) {
-                view = activity.LayoutInflater.Inflate (Resource.Layout.EntryListItem, parent, false);
-            }
-            */
+           
             TextView tvDate = view.FindViewById<TextView>(Resource.Id.entryItemDate);
             TextView tvDescription = view.FindViewById<TextView>(Resource.Id.entryItemDescription);
             TextView tvSum = view.FindViewById<TextView>(Resource.Id.entryItemSum);

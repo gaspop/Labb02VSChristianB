@@ -158,7 +158,7 @@ namespace Labb02
         {
 			
             //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
-            ArrayAdapter adapter = new ArrayAdapter<Account>(this, Resource.Layout.SpinnerItem, list);
+            ArrayAdapter adapter = new ArrayAdapter<Account>(this, Resource.Layout.EntrySpinnerItem, list);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
         }
@@ -166,7 +166,7 @@ namespace Labb02
         private void SetupTaxRateSpinner()
         {
             List<TaxRate> list = manager.TaxRates;
-            ArrayAdapter adapter = new ArrayAdapter<TaxRate>(this, Resource.Layout.SpinnerItem, list);
+            ArrayAdapter adapter = new ArrayAdapter<TaxRate>(this, Resource.Layout.EntrySpinnerItem, list);
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinVAT.Adapter = adapter;
 			spinVAT.ItemSelected += delegate { UpdateTotalSum(); };
