@@ -78,7 +78,7 @@ namespace Labb02.Model
 
 		public TableRow NewTableRow(Entry e)
 		{
-			TableRow tr = (TableRow)View.Inflate(activity, Resource.Layout.AccountReportTableRow, null);
+			TableRow tr = (TableRow)View.Inflate(activity, Resource.Layout.ReportTableRow, null);
 			TextView tvRowDate = tr.FindViewById<TextView>(Resource.Id.rowDate);
 			TextView tvRowDescription = tr.FindViewById<TextView>(Resource.Id.rowDescription);
 			TextView tvRowSum = tr.FindViewById<TextView>(Resource.Id.rowSum);

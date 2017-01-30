@@ -22,7 +22,7 @@ namespace Labb02
         {
             base.OnCreate(bundle);
             // Set our view from the "main" layout resource
-			this.SetTitle(Resource.String.activityLabelMain);
+			SetTitle(Resource.String.activityLabelMain);
             SetContentView (Resource.Layout.MainActivity);
 			SetupButtons();
 
@@ -58,6 +58,5 @@ namespace Labb02
 				StartActivity(i);
 			};
 		}
-
     }
 }

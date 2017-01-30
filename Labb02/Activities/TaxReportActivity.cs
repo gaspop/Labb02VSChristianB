@@ -18,17 +18,39 @@ namespace Labb02
 	[Activity(Label = "@string/activityLabelTaxReport")]
 	public class TaxReportActivity : Activity
 	{
-		TextView tvReport;
+        BookkeeperManager manager;
+        TableLayout tableReport;
 
-		protected override void OnCreate(Bundle savedInstanceState)
-		{
-			base.OnCreate(savedInstanceState);
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
 
-			// Create your application here
-			SetContentView(Resource.Layout.TaxReportActivity);
+            // Create your application here
+            SetContentView(Resource.Layout.TaxReportActivity);
+            tableReport = FindViewById<TableLayout>(Resource.Id.tableReport);
+            manager = BookkeeperManager.Instance;
 
-			tvReport = FindViewById<TextView>(Resource.Id.tvReport);
-			tvReport.Text = BookkeeperManager.Instance.GetTaxReport();
-		}
-	}
+            OrganizeTaxReport();
+        }
+
+        private void OrganizeTaxReport()
+        {
+            string[] splitter = new string[] { "\n\n" };
+            string[] report = manager.GetTaxReport().Split(splitter, StringSplitOptions.RemoveEmptyEntries);
+            for(int i = 0; i < report.Length; i++)
+            {
+                string[] reportEvent = report[i].Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                TableRow tr = (TableRow)View.Inflate(this, Resource.Layout.ReportTableRow, null);
+                TextView tvRowDate = tr.FindViewById<TextView>(Resource.Id.rowDate);
+                TextView tvRowDescription = tr.FindViewById<TextView>(Resource.Id.rowDescription);
+                TextView tvRowSum = tr.FindViewById<TextView>(Resource.Id.rowSum);
+                tvRowDate.Text = reportEvent[0];
+                tvRowDescription.Text = reportEvent[1];
+                tvRowSum.Text = reportEvent[2];
+
+                tableReport.AddView(tr);
+            }
+        }
+
+    }
 }

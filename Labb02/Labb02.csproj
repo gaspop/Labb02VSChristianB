@@ -86,7 +86,7 @@
     <AndroidResource Include="Resources\layout\TaxReportActivity.axml" />
     <AndroidResource Include="Resources\drawable\bookkeeperIcon.png" />
     <AndroidResource Include="Resources\layout\AccountReportActivity.axml" />
-    <AndroidResource Include="Resources\layout\AccountReportTableRow.axml" />
+    <AndroidResource Include="Resources\layout\ReportTableRow.axml" />
     <AndroidResource Include="Resources\layout\AccountReportItem.axml" />
   </ItemGroup>
   <ItemGroup>

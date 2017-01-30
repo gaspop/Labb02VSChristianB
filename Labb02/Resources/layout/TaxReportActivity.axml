@@ -6,12 +6,38 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="Report"
-            android:id="@+id/tvReport" />
+            android:padding="16dp"
+            android:id="@+id/tableReport">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
+                <TextView
+                    style="@android:style/TextAppearance.Small"
+                    android:layout_weight="2"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/taxReportDate" />
+                <TextView
+                    style="@android:style/TextAppearance.Small"
+                    android:layout_weight="4"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/taxReportDescription" />
+                <TextView
+                    style="@android:style/TextAppearance.Small"
+                    android:layout_weight="2"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:text="@string/taxReportVAT" />
+            </TableRow>
+        </TableLayout>
     </ScrollView>
 </LinearLayout>

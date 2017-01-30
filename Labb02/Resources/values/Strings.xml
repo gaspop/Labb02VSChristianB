@@ -40,5 +40,9 @@
 
 	<string name="accountReportAccount">Konto:</string>
 	<string name="accountReportTotalSum">Totalt belopp:</string>
+
+    <string name="taxReportDate">Datum</string>
+    <string name="taxReportDescription">Händelse</string>
+    <string name="taxReportVAT">Skatt</string>
 	
 </resources>
