@@ -15,7 +15,11 @@ using SQLite;
 namespace Labb02.Model
 {
 
-    public enum EntryType { Income = 1 , Expense = 2 }
+    public enum EntryType 
+	{ 
+		Income = 1, 
+		Expense = 2, 
+	}
 
 	public class Entry : Java.Lang.Object
     {
@@ -24,8 +28,8 @@ namespace Labb02.Model
         public EntryType Type { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
-        public int AccountType { get; set; }
-        public int AccountTarget { get; set; }
+        public int AccountTypeNumber { get; set; }
+        public int AccountTargetNumber { get; set; }
         public int SumTotal { get; set; }
         public float Rate { get; set; }
 

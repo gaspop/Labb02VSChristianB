@@ -28,6 +28,7 @@
     <string name="entryTotalSumVAT">Belopp (inkl. moms):</string>
     <string name="entryTotalSum">Belopp (exkl. moms):</string>
     <string name="entryVAT">Moms:</string>
+	<string name="entryFieldHint">Skriv här"</string>
 
 	<string name="entryToastEntryAdded">Händelse tillagd</string>
 	<string name="entryToastEntryUpdated">Händelse uppdaterad</string>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,9 +55,9 @@ namespace Labb02.Model
 			Account account = list[position];
 			List<Entry> entries = manager.Entries.OrderBy(e => e.Date).ToList();
 			if (account.Type != AccountType.Money)
-				entries = entries.Where(e => e.AccountType == account.Number).ToList();
+				entries = entries.Where(e => e.AccountTypeNumber == account.Number).ToList();
 			else
-				entries = entries.Where(e => e.AccountTarget == account.Number).ToList();
+				entries = entries.Where(e => e.AccountTargetNumber == account.Number).ToList();
 
 			tvName.Text = account.Name + " (" + account.Number + ")";
 			tlEntries.RemoveAllViews();

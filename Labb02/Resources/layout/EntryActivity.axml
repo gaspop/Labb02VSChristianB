@@ -80,7 +80,7 @@
                 android:inputType="text"
                 android:imeOptions="actionDone"
                 android:maxLength="80"
-                android:hint="Skriv här"
+                android:hint="@string/entryFieldHint"
                 android:id="@+id/etDescription" />
         </LinearLayout>
         <LinearLayout
@@ -157,6 +157,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:imeOptions="actionDone"
+                android:hint="@string/entryFieldHint"
                 android:id="@+id/etTotalSum" />
         </LinearLayout>
         <LinearLayout

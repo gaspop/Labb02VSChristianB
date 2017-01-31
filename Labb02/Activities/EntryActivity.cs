@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -127,19 +127,19 @@ namespace Labb02
 			{
 				SetModeIncome();
 				spinType.SetSelection
-						(GetMatchingAccountNumberIndex(entryEdit.AccountType, manager.IncomeAccounts));
+						(GetMatchingAccountNumberIndex(entryEdit.AccountTypeNumber, manager.IncomeAccounts));
 			}
 			else
 			{
 				SetModeExpense();
 				spinType.SetSelection
-						(GetMatchingAccountNumberIndex(entryEdit.AccountType, manager.ExpenseAccounts));
+						(GetMatchingAccountNumberIndex(entryEdit.AccountTypeNumber, manager.ExpenseAccounts));
 			}
 			tvDescription.Text = GetString(Resource.String.entryEditInstructions);
 			etDescription.Text = entryEdit.Description;
 			etTotalSum.Text = string.Format("{0}", entryEdit.SumTotal);
 			spinAccount.SetSelection
-					   (GetMatchingAccountNumberIndex(entryEdit.AccountTarget, manager.MoneyAccounts));
+					   (GetMatchingAccountNumberIndex(entryEdit.AccountTargetNumber, manager.MoneyAccounts));
 			spinVAT.SetSelection(GetMatchingTaxRateIndex());
 			btnEntry.Text = GetString(Resource.String.entryUpdateEvent);
 			SetTitle(Resource.String.activityLabelEntryEdit);
@@ -265,8 +265,8 @@ namespace Labb02
 				e.Type = entryType;
 				e.Date = entryDate;
 				e.Description = etDescription.Text;
-				e.AccountType = GetAccountFromSpinner(spinType);
-				e.AccountTarget = GetAccountFromSpinner(spinAccount);
+				e.AccountTypeNumber = GetAccountFromSpinner(spinType);
+				e.AccountTargetNumber = GetAccountFromSpinner(spinAccount);
 				e.SumTotal = Convert.ToInt32(etTotalSum.Text);
 				e.Rate = GetTaxRateFromSpinner();
 
@@ -288,8 +288,8 @@ namespace Labb02
 			entryEdit.Type = entry.Type;
 			entryEdit.Date = entry.Date;
 			entryEdit.Description = entry.Description;
-			entryEdit.AccountType = entry.AccountType;
-			entryEdit.AccountTarget = entry.AccountTarget;
+			entryEdit.AccountTypeNumber = entry.AccountTypeNumber;
+			entryEdit.AccountTargetNumber = entry.AccountTargetNumber;
 			entryEdit.SumTotal = entry.SumTotal;
 			entryEdit.Rate = entry.Rate;
 
