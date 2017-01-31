@@ -12,7 +12,7 @@ using Android.Widget;
 
 using SQLite;
 
-namespace Labb02.Model
+namespace Bookkeeper.Model
 {
 	public enum AccountType
 	{

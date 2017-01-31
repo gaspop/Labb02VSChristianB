@@ -12,9 +12,9 @@ using Android.Views;
 using Android.Widget;
 using Android.Util;
 
-using Labb02.Model;
+using Bookkeeper.Model;
 
-namespace Labb02
+namespace Bookkeeper
 {
 	[Activity(Label = "@string/activityLabelEntryAdd")]
 	public class EntryActivity : Activity

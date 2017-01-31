@@ -11,9 +11,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-using Labb02.Model;
+using Bookkeeper.Model;
 
-namespace Labb02
+namespace Bookkeeper
 {
 	[Activity(Label = "@string/activityLabelAccountReport")]
 	public class AccountReportActivity : Activity

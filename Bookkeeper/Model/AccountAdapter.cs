@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Graphics;
 
-namespace Labb02.Model
+namespace Bookkeeper.Model
 {
 	class AccountAdapter : BaseAdapter<Account>
 	{

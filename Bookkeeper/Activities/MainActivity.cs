@@ -4,9 +4,9 @@ using Android.OS;
 using Android.Content;
 using Android.Util;
 
-using Labb02.Model;
+using Bookkeeper.Model;
 
-namespace Labb02
+namespace Bookkeeper
 {
     [Activity(MainLauncher = true, Icon = "@drawable/bookkeeperIcon")]
     public class MainActivity : Activity
