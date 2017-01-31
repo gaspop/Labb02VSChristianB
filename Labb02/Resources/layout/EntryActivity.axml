@@ -16,7 +16,7 @@
             android:layout_height="0dp"
             android:layout_centerHorizontal="true"
             android:textStyle="bold"
-            android:text="@string/eventInstructions"
+            android:text="@string/entryInstructions"
             android:id="@+id/tvDescription" />
         <RadioGroup
             android:orientation="horizontal"
@@ -29,7 +29,7 @@
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="@string/eventIncome"
+                android:text="@string/entryIncome"
                 android:id="@+id/radSetIncome" />
             <RadioButton
                 style="@android:style/TextAppearance.Medium"
@@ -37,7 +37,7 @@
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="@string/eventExpense"
+                android:text="@string/entryExpense"
                 android:id="@+id/radSetExpense" />
         </RadioGroup>
         <LinearLayout
@@ -51,7 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="@string/eventDate" />
+                android:text="@string/entryDate" />
             <Button
                 style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_data_weight"
@@ -71,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="@string/eventDescription" />
+                android:text="@string/entryDescription" />
             <EditText
                 style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_data_weight"
@@ -94,7 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="@string/eventType" />
+                android:text="@string/entryType" />
             <Spinner
                 android:layout_weight="@integer/event_column_data_weight"
                 android:layout_width="0dp"
@@ -112,7 +112,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="@string/eventToFromAccount" />
+                android:text="@string/entryToFromAccount" />
             <Spinner
                 android:layout_weight="@integer/event_column_data_weight"
                 android:layout_width="0dp"
@@ -130,7 +130,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="@string/eventTotalSum" />
+                android:text="@string/entryTotalSum" />
             <TextView
                 style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_data_weight"
@@ -149,7 +149,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="@string/eventTotalSumVAT" />
+                android:text="@string/entryTotalSumVAT" />
             <EditText
                 style="@android:style/TextAppearance.Small"
                 android:layout_weight="@integer/event_column_data_weight"
@@ -170,7 +170,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="@string/eventVAT" />
+                android:text="@string/entryVAT" />
             <Spinner
                 android:layout_weight="@integer/event_column_data_weight"
                 android:layout_width="0dp"
@@ -188,8 +188,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
                 android:textStyle="bold"
-                android:text="@string/eventAddEvent"
-                android:id="@+id/btnAddEvent" />
+                android:text="@string/entryAddEvent"
+                android:id="@+id/btnEntry" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

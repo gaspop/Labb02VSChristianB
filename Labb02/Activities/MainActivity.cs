@@ -21,18 +21,12 @@ namespace Labb02
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            // Set our view from the "main" layout resource
+			SetContentView (Resource.Layout.MainActivity);
+
 			SetTitle(Resource.String.activityLabelMain);
-            SetContentView (Resource.Layout.MainActivity);
 			SetupButtons();
 
         }
-
-		protected override void OnResume()
-		{
-			base.OnResume();
-			Log.Debug(TAG, BookkeeperManager.Instance.EntryToString());
-		}
 
         private void SetupButtons()
 		{

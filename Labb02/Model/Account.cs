@@ -21,7 +21,7 @@ namespace Labb02.Model
 		Money = 3,
 	}
 
-    public class Account
+    public class Account : Java.Lang.Object
     {
 		[PrimaryKey, Column("_id")]
 		public int Number { get; set; }

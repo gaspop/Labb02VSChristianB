@@ -15,7 +15,7 @@ using Labb02.Model;
 
 namespace Labb02
 {
-	[Activity(Label = "AccountReportActivity")]
+	[Activity(Label = "@string/activityLabelAccountReport")]
 	public class AccountReportActivity : Activity
 	{
 
@@ -24,14 +24,11 @@ namespace Labb02
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-
-			// Create your application here
 			SetContentView(Resource.Layout.AccountReportActivity);
 
 			AccountAdapter adapter = new AccountAdapter(this);
 			lvAccounts = FindViewById<ListView>(Resource.Id.lvAccounts);
 			lvAccounts.Adapter = adapter;
-
 		}
 
 	}

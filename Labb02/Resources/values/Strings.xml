@@ -15,24 +15,24 @@
 	<string name="mainMenuShowAllEvents">Visa alla händelser</string>
 	<string name="mainMenuCreateReports">Skapa rapporter</string>
 
-	<string name="eventInstructions">Här kan du lägga till nya händelser, antingen inkomster eller utgifter.</string>
-	<string name="eventEditInstructions">Här kan du redigera den aktuella händelsen.</string>
-    <string name="eventAddEvent">Lägg till händelse</string>
-    <string name="eventUpdateEvent">Spara ändringar</string>
-    <string name="eventIncome">Inkomst</string>
-    <string name="eventExpense">Utgift</string>
-    <string name="eventDate">Datum:</string>
-    <string name="eventDescription">Beskrivning:</string>
-    <string name="eventType">Typ:</string>
-    <string name="eventToFromAccount">Till/från konto:</string>
-    <string name="eventTotalSumVAT">Belopp (inkl. moms):</string>
-    <string name="eventTotalSum">Belopp (exkl. moms):</string>
-    <string name="eventVAT">Moms:</string>
+	<string name="entryInstructions">Här kan du lägga till nya händelser, antingen inkomster eller utgifter.</string>
+	<string name="entryEditInstructions">Här kan du redigera den aktuella händelsen.</string>
+    <string name="entryAddEvent">Lägg till händelse</string>
+    <string name="entryUpdateEvent">Spara ändringar</string>
+    <string name="entryIncome">Inkomst</string>
+    <string name="entryExpense">Utgift</string>
+    <string name="entryDate">Datum:</string>
+    <string name="entryDescription">Beskrivning:</string>
+    <string name="entryType">Typ:</string>
+    <string name="entryToFromAccount">Till/från konto:</string>
+    <string name="entryTotalSumVAT">Belopp (inkl. moms):</string>
+    <string name="entryTotalSum">Belopp (exkl. moms):</string>
+    <string name="entryVAT">Moms:</string>
 
-	<string name="eventToastEntryAdded">Händelse tillagd</string>
-	<string name="eventToastEntryUpdated">Händelse uppdaterad</string>
-	<string name="eventToastErrorDescription">Du måste lämna en beskrivning</string>
-	<string name="eventToastErrorSum">Du måste skriva in ett belopp</string>
+	<string name="entryToastEntryAdded">Händelse tillagd</string>
+	<string name="entryToastEntryUpdated">Händelse uppdaterad</string>
+	<string name="entryToastErrorDescription">Du måste lämna en beskrivning</string>
+	<string name="entryToastErrorSum">Du måste skriva in ett belopp</string>
 
 	<string name="reportHeader">Välj alternativ</string>
 	<string name="reportAccountReport">Rapport över konton</string>

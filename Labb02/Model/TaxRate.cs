@@ -15,7 +15,7 @@ using SQLite;
 namespace Labb02.Model
 {
 	
-    public class TaxRate
+    public class TaxRate : Java.Lang.Object
     {
 		[PrimaryKey, AutoIncrement, Column("_id")]
 		public int Id { get; private set; }

@@ -25,9 +25,8 @@ namespace Labb02
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-
-			// Create your application here
 			SetContentView(Resource.Layout.CreateReportsActivity);
+
 			SetupButtons();
 		}
 
@@ -44,8 +43,7 @@ namespace Labb02
 			btnVATReport.Click += delegate
 			{
 				Intent i = new Intent(this, typeof(TaxReportActivity));
-				StartActivity(i);
-				                     
+				StartActivity(i);			                  
 			};
 		}
 	}

@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidTlsProvider>
     </AndroidTlsProvider>
@@ -88,6 +88,7 @@
     <AndroidResource Include="Resources\layout\AccountReportActivity.axml" />
     <AndroidResource Include="Resources\layout\ReportTableRow.axml" />
     <AndroidResource Include="Resources\layout\AccountReportItem.axml" />
+    <AndroidResource Include="Resources\layout\EntrySpinnerDropdownItem.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\MainActivity.axml">

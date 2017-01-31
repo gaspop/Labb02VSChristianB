@@ -15,13 +15,14 @@ namespace Labb02.Model
 {
     class EntryAdapter: BaseAdapter<Entry>
     {
+		BookkeeperManager manager = BookkeeperManager.Instance;
         Activity activity;
         List<Entry> list;
 
         public EntryAdapter(Activity activity)
         {
             this.activity = activity;
-			list = BookkeeperManager.Instance.Entries.OrderBy(e => e.Date).ToList();
+			list = manager.Entries.OrderBy(e => e.Date).ToList();
         }
 
 		public override Entry this[int position]

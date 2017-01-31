@@ -21,17 +21,15 @@ namespace Labb02
 	{
         public static readonly string TAG = "EntryActivity";
 
+		BookkeeperManager manager;
 		bool modeEdit;
 		int entryEditId;
-		Entry entryEdit;
-		BookkeeperManager manager = BookkeeperManager.Instance;
 
-		Entry entry;
+		Entry entry, entryEdit;
         EntryType entryType;
-        List<Account> entryTypeList;
         DateTime entryDate;
 
-        Button btnDate, btnAddEntry;
+        Button btnDate, btnEntry;
         RadioButton radSetIncome, radSetExpense;
         EditText etDescription, etTotalSum;
         TextView tvDescription, tvTotalSum;
@@ -41,29 +39,18 @@ namespace Labb02
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.EntryActivity);
-			// Create your application here
 
-            // Run View Element setup
+			manager = BookkeeperManager.Instance;
+			modeEdit = Intent.GetBooleanExtra("EXTRA_EDIT", false);
+            entryEditId = Intent.GetIntExtra("EXTRA_ID", 0);
             InstantiateViews();
             SetupViews();
-            SetupRadioButtons();
-            SetupAccountSpinner(spinAccount, manager.MoneyAccounts);
-            SetupTaxRateSpinner();
-
-			// Run Edit Mode
-			if (modeEdit = Intent.GetBooleanExtra("EXTRA_EDIT", false))
-			{
-				entryEditId = Intent.GetIntExtra("EXTRA_ID", 0);
-				Log.Debug(TAG, "ID retrieved: " + Intent.GetIntExtra("EXTRA_ID", 0));
-				SetupEditMode();
-			}
-
         }
 
         private void InstantiateViews()
         {
             btnDate = FindViewById<Button>(Resource.Id.btnDate);
-            btnAddEntry = FindViewById<Button>(Resource.Id.btnAddEvent);
+            btnEntry = FindViewById<Button>(Resource.Id.btnEntry);
             radSetIncome = FindViewById<RadioButton>(Resource.Id.radSetIncome);
             radSetExpense = FindViewById<RadioButton>(Resource.Id.radSetExpense);
 			tvDescription = FindViewById<TextView>(Resource.Id.tvDescription);
@@ -75,63 +62,29 @@ namespace Labb02
             spinVAT = FindViewById<Spinner>(Resource.Id.spinVAT);
         }
 
-		private int GetAccountNumberIndex(int number, List<Account> list)
-		{
-			for (int i = 0; i < list.Count; i++)
-			{
-				if (list[i].Number == number)
-					return i;
-			}
-			return 0;
-		}
-
-		private int GetTaxRateIndex()
-		{
-			Log.Debug(TAG, "GetTaxRateIndex:");
-			List<TaxRate> list = manager.TaxRates;
-			for (int i = 0; i < list.Count; i++)
-			{
-				Log.Debug(TAG, "List Rate: " + list[i].Rate + " vs. " + entryEdit.Rate);
-				if (list[i].Rate == entryEdit.Rate)
-					return i;
-			}
-			return 0;
-		}
-
-		private void SetupEditMode()
-		{
-			this.SetTitle(Resource.String.activityLabelEntryEdit);
-			tvDescription.Text = GetString(Resource.String.eventEditInstructions);
-			btnAddEntry.Text = GetString(Resource.String.eventUpdateEvent);
-			entryEdit = manager.Entries.Where(e => e.Id == entryEditId).ToList()[0];
-			entryType = entryEdit.Type;
-			UpdateDate(entryEdit.Date);
-			etDescription.Text = entryEdit.Description;
-			if (entryType == EntryType.Income)
-			{
-				SetModeIncome();
-				spinType.SetSelection(GetAccountNumberIndex(entryEdit.AccountType, manager.IncomeAccounts));
-			}
-			else
-			{
-				SetModeExpense();
-				spinType.SetSelection(GetAccountNumberIndex(entryEdit.AccountType, manager.ExpenseAccounts));
-			}
-			spinAccount.SetSelection(GetAccountNumberIndex(entryEdit.AccountTarget, manager.MoneyAccounts));
-			etTotalSum.Text = string.Format("{0}",entryEdit.SumTotal);
-			spinVAT.SetSelection(GetTaxRateIndex());
-			UpdateTotalSum();
-		}
-
         private void SetupViews()
         {
+			SetupButtons();
+			SetupRadioButtons();
+			SetupTaxRateSpinner();
+			SetupAccountSpinner(spinAccount, manager.MoneyAccounts);
+
+			if (modeEdit)
+				SetupEditMode();
+			else
+				SetModeIncome();
 
             if (entryDate == DateTime.MinValue)
-                UpdateDate(DateTime.Now);
+                SetDate(DateTime.Now);
 
-            btnDate.Click += DateSelect_OnClick;
+            etTotalSum.TextChanged += delegate { SetTotalSumVAT(); };
+        }
 
-            btnAddEntry.Click += delegate {
+		private void SetupButtons()
+		{
+			btnDate.Click += SelectDate;
+			btnEntry.Click += delegate
+			{
 				entry = GenerateEntry();
 				if (!(entry == null))
 				{
@@ -141,11 +94,7 @@ namespace Labb02
 						AddEntry(entry);
 				}
 			};
-
-            SetModeIncome();
-
-            etTotalSum.TextChanged += delegate { UpdateTotalSum(); };
-        }
+		}
 
         private void SetupRadioButtons()
         {
@@ -156,10 +105,8 @@ namespace Labb02
 
         private void SetupAccountSpinner(Spinner spinner, List<Account> list)
         {
-			
-            //spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
             ArrayAdapter adapter = new ArrayAdapter<Account>(this, Resource.Layout.EntrySpinnerItem, list);
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            adapter.SetDropDownViewResource(Resource.Layout.EntrySpinnerDropdownItem);
             spinner.Adapter = adapter;
         }
 
@@ -167,88 +114,119 @@ namespace Labb02
         {
             List<TaxRate> list = manager.TaxRates;
             ArrayAdapter adapter = new ArrayAdapter<TaxRate>(this, Resource.Layout.EntrySpinnerItem, list);
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            adapter.SetDropDownViewResource(Resource.Layout.EntrySpinnerDropdownItem);
             spinVAT.Adapter = adapter;
-			spinVAT.ItemSelected += delegate { UpdateTotalSum(); };
+			spinVAT.ItemSelected += delegate { SetTotalSumVAT(); };
         }
 
-        /*
-        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            Log.Debug(TAG, "Item selected!");
-        }
-        */
-
-        void DateSelect_OnClick(object sender, EventArgs eventArgs)
-        {
-            DatePickerFragment frag;
-            frag = DatePickerFragment.NewInstance(delegate (DateTime date) 
-                                                    {
-                                                        UpdateDate(date);
-                                                    });
-            frag.Show(FragmentManager, DatePickerFragment.TAG);
-        }
-
+		private void SetupEditMode()
+		{
+			entryEdit = manager.Entries.Where(e => e.Id == entryEditId).ToList()[0];
+			entryType = entryEdit.Type;
+			if (entryType == EntryType.Income)
+			{
+				SetModeIncome();
+				spinType.SetSelection
+						(GetMatchingAccountNumberIndex(entryEdit.AccountType, manager.IncomeAccounts));
+			}
+			else
+			{
+				SetModeExpense();
+				spinType.SetSelection
+						(GetMatchingAccountNumberIndex(entryEdit.AccountType, manager.ExpenseAccounts));
+			}
+			tvDescription.Text = GetString(Resource.String.entryEditInstructions);
+			etDescription.Text = entryEdit.Description;
+			etTotalSum.Text = string.Format("{0}", entryEdit.SumTotal);
+			spinAccount.SetSelection
+					   (GetMatchingAccountNumberIndex(entryEdit.AccountTarget, manager.MoneyAccounts));
+			spinVAT.SetSelection(GetMatchingTaxRateIndex());
+			btnEntry.Text = GetString(Resource.String.entryUpdateEvent);
+			SetTitle(Resource.String.activityLabelEntryEdit);
+			SetDate(entryEdit.Date);
+			SetTotalSumVAT();
+		}
 
         private void SetModeIncome()
-        {
-            radSetIncome.Checked = true;
-            entryType = EntryType.Income;
-            entryTypeList = manager.IncomeAccounts;
-            SetupAccountSpinner(spinType, entryTypeList);
-        }
+		{
+			radSetIncome.Checked = true;
+			entryType = EntryType.Income;
+			SetupAccountSpinner(spinType, manager.IncomeAccounts);
+		}
 
-        private void SetModeExpense()
-        {
-            radSetExpense.Checked = true;
-            entryType = EntryType.Expense;
-            entryTypeList = manager.ExpenseAccounts;
-            SetupAccountSpinner(spinType, entryTypeList);
-        }
+		private void SetModeExpense()
+		{
+			radSetExpense.Checked = true;
+			entryType = EntryType.Expense;
+			SetupAccountSpinner(spinType, manager.ExpenseAccounts);
+		}
 
-        private void UpdateDate(DateTime newDate)
+		private void SetTotalSumVAT()
+		{
+			TaxRate t = (TaxRate)spinVAT.SelectedItem;
+			try
+			{
+				double sum = Convert.ToDouble(etTotalSum.Text);
+				sum /= (1.0 + t.Rate);
+				tvTotalSum.Text = String.Format("{0}", Math.Round(sum));
+			}
+			catch
+			{
+				tvTotalSum.Text = "-";
+			}
+		}
+
+		private void SetDate(DateTime newDate)
         {
             entryDate = newDate;
             btnDate.Text = entryDate.ToString("yyyy-MM-dd");
         }
 
-        private void UpdateTotalSum()
-        {
-            TaxRate t = manager.TaxRates[spinVAT.SelectedItemPosition];
-            try
-            {
-                double sum = Convert.ToDouble(etTotalSum.Text);
-				sum /= (1.0 + t.Rate);
-				tvTotalSum.Text = String.Format("{0}",Math.Round(sum));
-            }
-            catch
-            {
-                tvTotalSum.Text = "-";
-            }
-        }
+        void SelectDate(object sender, EventArgs eventArgs)
+		{
+			DatePickerFragment frag;
+			frag = DatePickerFragment.NewInstance(delegate (DateTime date)
+													{
+														SetDate(date);
+													});
+			frag.Show(FragmentManager, DatePickerFragment.TAG);
+		}
 
+		private int GetMatchingAccountNumberIndex(int number, List<Account> list)
+		{
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (list[i].Number == number)
+					return i;
+			}
+			return 0;
+		}
+
+		private int GetMatchingTaxRateIndex()
+		{
+			for (int i = 0; i < spinVAT.Count; i++)
+			{
+				if (((TaxRate)spinVAT.Adapter.GetItem(i)).Rate == entryEdit.Rate)
+					return i;
+			}
+			return 0;
+		}
 
         private int GetAccountFromSpinner(Spinner spin)
         {
-            string text = spin.SelectedItem.ToString();
-			int textIndex = text.IndexOf(':');
-			string textData = text.Substring(0, text.Length - (text.Length - textIndex));
-            try
-            {
-                int number = Convert.ToInt32(textData);
-				Log.Debug(TAG, "GetAccountFromSpinner: Returning '" + number + "'");
-				return number;
-            }
-            catch
-            {
-                Log.Debug(TAG, "GetAccountFromSpinner: Error!");
-                return 0;
-            }
+			try
+			{
+				return ((Account)spin.SelectedItem).Number;
+			}
+			catch
+			{
+				return 0;
+			}
         }
 
         private float GetTaxRateFromSpinner()
         {
-			return manager.TaxRates[spinVAT.SelectedItemPosition].Rate;
+			return ((TaxRate)spinVAT.SelectedItem).Rate;
         }
 
         private bool ValidateData()
@@ -257,7 +235,7 @@ namespace Labb02
 			bool valid = true;
 			if (etDescription.Text.Length == 0)
 			{
-				message = GetString(Resource.String.eventToastErrorDescription);
+				message = GetString(Resource.String.entryToastErrorDescription);
 				valid = false;
 			}
 			else
@@ -268,7 +246,7 @@ namespace Labb02
 				}
 				catch
 				{
-					message = GetString(Resource.String.eventToastErrorSum);
+					message = GetString(Resource.String.entryToastErrorSum);
 					valid = false;
 				}
 			}
@@ -292,7 +270,6 @@ namespace Labb02
 				e.SumTotal = Convert.ToInt32(etTotalSum.Text);
 				e.Rate = GetTaxRateFromSpinner();
 
-				Log.Debug(TAG, "Generating Entry:\n" + e);
 				return e;
 			}
 			return null;
@@ -301,7 +278,7 @@ namespace Labb02
         private void AddEntry(Entry e)
         {
 			manager.AddEntry(e);
-			string message = GetString(Resource.String.eventToastEntryAdded);
+			string message = GetString(Resource.String.entryToastEntryAdded);
 			Toast.MakeText(this, message, ToastLength.Long).Show();
 			Finish();
 		}
@@ -318,7 +295,7 @@ namespace Labb02
 
 			manager.UpdateEntry(entryEdit);
 
-			string message = GetString(Resource.String.eventToastEntryUpdated);
+			string message = GetString(Resource.String.entryToastEntryUpdated);
 			Toast.MakeText(this, message, ToastLength.Long).Show();
 			Finish();
 		}
@@ -354,7 +331,6 @@ namespace Labb02
             Log.Debug(TAG, selectedDate.ToLongDateString());
             _dateSelectedHandler(selectedDate);
         }
-
 
     }
 
