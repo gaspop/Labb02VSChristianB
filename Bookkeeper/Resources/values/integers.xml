@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="event_column_label_weight">5</integer>
-    <integer name="event_column_data_weight">6</integer>
+    <integer name="eventColumnLabelWeight">5</integer>
+    <integer name="eventColumnDataWeight">6</integer>
 </resources>

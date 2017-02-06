@@ -47,14 +47,14 @@
             android:layout_height="0dp">
             <TextView
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_weight="@integer/eventColumnLabelWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="@string/entryDate" />
             <Button
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_weight="@integer/eventColumnDataWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -67,14 +67,14 @@
             android:layout_height="0dp">
             <TextView
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_weight="@integer/eventColumnLabelWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="@string/entryDescription" />
             <EditText
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_weight="@integer/eventColumnDataWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -90,13 +90,13 @@
             android:layout_height="0dp">
             <TextView
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_weight="@integer/eventColumnLabelWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="@string/entryType" />
             <Spinner
-                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_weight="@integer/eventColumnDataWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinType" />
@@ -108,13 +108,13 @@
             android:layout_height="0dp">
             <TextView
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_weight="@integer/eventColumnLabelWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="@string/entryToFromAccount" />
             <Spinner
-                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_weight="@integer/eventColumnDataWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinAccount" />
@@ -126,14 +126,14 @@
             android:layout_height="0dp">
             <TextView
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_weight="@integer/eventColumnLabelWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="@string/entryTotalSum" />
             <TextView
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_weight="@integer/eventColumnDataWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTotalSum" />
@@ -145,14 +145,14 @@
             android:layout_height="0dp">
             <TextView
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_weight="@integer/eventColumnLabelWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="@string/entryTotalSumVAT" />
             <EditText
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_weight="@integer/eventColumnDataWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -167,13 +167,13 @@
             android:layout_height="0dp">
             <TextView
                 style="@android:style/TextAppearance.Small"
-                android:layout_weight="@integer/event_column_label_weight"
+                android:layout_weight="@integer/eventColumnLabelWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="@string/entryVAT" />
             <Spinner
-                android:layout_weight="@integer/event_column_data_weight"
+                android:layout_weight="@integer/eventColumnDataWeight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinVAT" />

@@ -28,11 +28,10 @@ namespace Bookkeeper.Model
         public EntryType Type { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
-        public int AccountTypeNumber { get; set; }
-        public int AccountTargetNumber { get; set; }
+        public int TypeAccountNumber { get; set; }
+        public int MoneyAccountNumber { get; set; }
         public int SumTotal { get; set; }
         public float Rate { get; set; }
-
     }
 
 }

@@ -55,9 +55,9 @@ namespace Bookkeeper.Model
 			Account account = list[position];
 			List<Entry> entries = manager.Entries.OrderBy(e => e.Date).ToList();
 			if (account.Type != AccountType.Money)
-				entries = entries.Where(e => e.AccountTypeNumber == account.Number).ToList();
+				entries = entries.Where(e => e.TypeAccountNumber == account.Number).ToList();
 			else
-				entries = entries.Where(e => e.AccountTargetNumber == account.Number).ToList();
+				entries = entries.Where(e => e.MoneyAccountNumber == account.Number).ToList();
 
 			tvName.Text = account.Name + " (" + account.Number + ")";
 			tlEntries.RemoveAllViews();
@@ -71,7 +71,7 @@ namespace Bookkeeper.Model
 			tvSum.Text = SumTotal + " kr";
 
             view.SetBackgroundColor
-              (position % 2 == 1 ? new Color(64,64,64) : view.DrawingCacheBackgroundColor);
+              (position % 2 == 0 ? new Color(56,56,56) : view.DrawingCacheBackgroundColor);
 
             return view;
 		}
@@ -87,7 +87,7 @@ namespace Bookkeeper.Model
 			tvRowDescription.Text = e.Description;
 			tvRowSum.Text = string.Format("{0}", e.SumTotal);
 			tvRowSum.SetTextColor
-			  (e.Type == EntryType.Income ? new Color(76, 175, 80) : new Color(211, 47, 47));
+			        (e.Type == EntryType.Income ? Color.ForestGreen : Color.OrangeRed);
 
 			return tr;
 		}

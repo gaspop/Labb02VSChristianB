@@ -55,11 +55,8 @@ namespace Bookkeeper.Model
             tvDate.Text = entry.Date.ToString("yyyy-MM-dd");
             tvDescription.Text = entry.Description;
             tvSum.Text = entry.SumTotal + " kr";
-
-			if (entry.Type == EntryType.Income)
-				tvSum.SetTextColor(new Color(76, 175, 80));
-			else
-				tvSum.SetTextColor(new Color(211, 47, 47));
+			tvSum.SetTextColor
+			     (entry.Type == EntryType.Income ? Color.ForestGreen : Color.OrangeRed);
 
             return view;
 		}

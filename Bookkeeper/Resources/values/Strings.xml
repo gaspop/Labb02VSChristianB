@@ -45,5 +45,6 @@
     <string name="taxReportDate">Datum</string>
     <string name="taxReportDescription">Händelse</string>
     <string name="taxReportVAT">Skatt</string>
+	<string name="taxReportTotalVAT">Total skatt:</string>
 	
 </resources>

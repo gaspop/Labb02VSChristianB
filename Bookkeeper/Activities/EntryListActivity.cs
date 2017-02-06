@@ -26,7 +26,6 @@ namespace Bookkeeper
 			SetContentView(Resource.Layout.EntryListActivity);
 
 			SetupListView();
-
 		}
 
 		protected override void OnResume()
@@ -49,7 +48,7 @@ namespace Bookkeeper
 				intent.PutExtra("EXTRA_EDIT", true);
 				intent.PutExtra("EXTRA_ID", entry.Id);
 				StartActivity(intent);
-			};			
+			};
 		}
 
 	}

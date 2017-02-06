@@ -127,19 +127,19 @@ namespace Bookkeeper
 			{
 				SetModeIncome();
 				spinType.SetSelection
-						(GetMatchingAccountNumberIndex(entryEdit.AccountTypeNumber, manager.IncomeAccounts));
+						(GetMatchingAccountNumberIndex(entryEdit.TypeAccountNumber, manager.IncomeAccounts));
 			}
 			else
 			{
 				SetModeExpense();
 				spinType.SetSelection
-						(GetMatchingAccountNumberIndex(entryEdit.AccountTypeNumber, manager.ExpenseAccounts));
+						(GetMatchingAccountNumberIndex(entryEdit.TypeAccountNumber, manager.ExpenseAccounts));
 			}
 			tvDescription.Text = GetString(Resource.String.entryEditInstructions);
 			etDescription.Text = entryEdit.Description;
 			etTotalSum.Text = string.Format("{0}", entryEdit.SumTotal);
 			spinAccount.SetSelection
-					   (GetMatchingAccountNumberIndex(entryEdit.AccountTargetNumber, manager.MoneyAccounts));
+					   (GetMatchingAccountNumberIndex(entryEdit.MoneyAccountNumber, manager.MoneyAccounts));
 			spinVAT.SetSelection(GetMatchingTaxRateIndex());
 			btnEntry.Text = GetString(Resource.String.entryUpdateEvent);
 			SetTitle(Resource.String.activityLabelEntryEdit);
@@ -265,8 +265,8 @@ namespace Bookkeeper
 				e.Type = entryType;
 				e.Date = entryDate;
 				e.Description = etDescription.Text;
-				e.AccountTypeNumber = GetAccountFromSpinner(spinType);
-				e.AccountTargetNumber = GetAccountFromSpinner(spinAccount);
+				e.TypeAccountNumber = GetAccountFromSpinner(spinType);
+				e.MoneyAccountNumber = GetAccountFromSpinner(spinAccount);
 				e.SumTotal = Convert.ToInt32(etTotalSum.Text);
 				e.Rate = GetTaxRateFromSpinner();
 
@@ -288,8 +288,8 @@ namespace Bookkeeper
 			entryEdit.Type = entry.Type;
 			entryEdit.Date = entry.Date;
 			entryEdit.Description = entry.Description;
-			entryEdit.AccountTypeNumber = entry.AccountTypeNumber;
-			entryEdit.AccountTargetNumber = entry.AccountTargetNumber;
+			entryEdit.TypeAccountNumber = entry.TypeAccountNumber;
+			entryEdit.MoneyAccountNumber = entry.MoneyAccountNumber;
 			entryEdit.SumTotal = entry.SumTotal;
 			entryEdit.Rate = entry.Rate;
 
@@ -328,7 +328,6 @@ namespace Bookkeeper
         public void OnDateSet(DatePicker view, int year, int monthOfYear, int dayofMonth)
         {
             DateTime selectedDate = new DateTime(year, monthOfYear + 1, dayofMonth);
-            Log.Debug(TAG, selectedDate.ToLongDateString());
             _dateSelectedHandler(selectedDate);
         }
 

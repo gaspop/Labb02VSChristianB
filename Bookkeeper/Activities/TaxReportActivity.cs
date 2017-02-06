@@ -34,11 +34,13 @@ namespace Bookkeeper
 
         private void OrganizeTaxReport()
         {
+			int totalSum = 0;
             string[] splitter = new string[] { "\n\n" };
             string[] report = manager.GetTaxReport().Split(splitter, StringSplitOptions.RemoveEmptyEntries);
             for(int i = 0; i < report.Length; i++)
             {
                 string[] reportEvent = report[i].Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+				totalSum += Convert.ToInt32(reportEvent[2]);
                 TableRow tr = (TableRow)View.Inflate(this, Resource.Layout.ReportTableRow, null);
                 TextView tvRowDate = tr.FindViewById<TextView>(Resource.Id.rowDate);
                 TextView tvRowDescription = tr.FindViewById<TextView>(Resource.Id.rowDescription);
@@ -48,8 +50,20 @@ namespace Bookkeeper
                 tvRowSum.Text = reportEvent[2];
 
                 tableReport.AddView(tr);
+				if (i == report.Length -1)
+					DisplaySum(totalSum);
             }
         }
 
+		private void DisplaySum(int sum)
+		{
+			TableRow tr = (TableRow)View.Inflate(this, Resource.Layout.ReportTableRow, null);
+			TextView tvRowDescription = tr.FindViewById<TextView>(Resource.Id.rowDescription);
+			TextView tvRowSum = tr.FindViewById<TextView>(Resource.Id.rowSum);
+			tvRowDescription.Text = GetString(Resource.String.taxReportTotalVAT);
+			tvRowSum.Text = string.Format("{0}", sum);
+			tr.SetPadding(0, 32, 0, 0);
+			tableReport.AddView(tr);
+		}
     }
 }
