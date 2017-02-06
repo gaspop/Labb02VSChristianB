@@ -4,19 +4,19 @@
     android:layout_height="wrap_content">
     <TextView
         style="@android:style/TextAppearance.Small"
-        android:layout_weight="2"
+        android:layout_weight="@integer/tableRowDateWeight"
         android:layout_width="0px"
         android:layout_height="wrap_content"
         android:id="@+id/rowDate" />
     <TextView
         style="@android:style/TextAppearance.Small"
-        android:layout_weight="4"
+        android:layout_weight="@integer/tableRowDescriptionWeight"
         android:layout_width="0px"
         android:layout_height="wrap_content"
         android:id="@+id/rowDescription" />
     <TextView
         style="@android:style/TextAppearance.Small"
-        android:layout_weight="2"
+        android:layout_weight="@integer/tableRowSumWeight"
         android:layout_width="0px"
         android:layout_height="wrap_content"
         android:gravity="right"

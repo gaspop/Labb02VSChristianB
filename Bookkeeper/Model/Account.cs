@@ -14,13 +14,6 @@ using SQLite;
 
 namespace Bookkeeper.Model
 {
-	public enum AccountType
-	{
-		Income = 1,
-		Expense = 2,
-		Money = 3,
-	}
-
     public class Account : Java.Lang.Object
     {
 		[PrimaryKey, Column("_id")]
@@ -32,6 +25,14 @@ namespace Bookkeeper.Model
         {
             return Number + ": " + Name;
         }
-
     }
+
+
+    public enum AccountType
+    {
+        Income = 1,
+        Expense = 2,
+        Money = 3,
+    }
+
 }

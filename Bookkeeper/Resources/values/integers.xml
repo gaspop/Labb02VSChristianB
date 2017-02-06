@@ -2,4 +2,7 @@
 <resources>
     <integer name="eventColumnLabelWeight">5</integer>
     <integer name="eventColumnDataWeight">6</integer>
+    <integer name="tableRowDateWeight">2</integer>
+    <integer name="tableRowDescriptionWeight">4</integer>
+    <integer name="tableRowSumWeight">2</integer>
 </resources>

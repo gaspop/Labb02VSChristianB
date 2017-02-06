@@ -5,6 +5,13 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:id="@+id/rlRoot">
+    <TextView
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:gravity="center"
+        android:id="@+id/tvMessage" />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

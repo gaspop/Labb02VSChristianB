@@ -35,16 +35,20 @@
 	<string name="entryToastErrorDescription">Du måste lämna en beskrivning</string>
 	<string name="entryToastErrorSum">Du måste skriva in ett belopp</string>
 
-	<string name="reportHeader">Välj alternativ</string>
+    <string name="entryListNoEvents">Inga händelser att visa.</string>
+
+    <string name="reportHeader">Välj alternativ</string>
 	<string name="reportAccountReport">Rapport över konton</string>
 	<string name="reportVATReport">Momsrapport</string>
 
 	<string name="accountReportAccount">Konto:</string>
 	<string name="accountReportTotalSum">Totalt belopp:</string>
+    <string name="accountReportNoEvents">Det finns inga registrerade händelser att skapa en kontorapport av.</string>
 
     <string name="taxReportDate">Datum</string>
     <string name="taxReportDescription">Händelse</string>
     <string name="taxReportVAT">Skatt</string>
 	<string name="taxReportTotalVAT">Total skatt:</string>
+    <string name="taxReportNoEvents">Det finns inga registrerade händelser att skapa en momsrapport av.</string>
 	
 </resources>

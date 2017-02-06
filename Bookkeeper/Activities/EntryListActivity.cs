@@ -18,23 +18,39 @@ namespace Bookkeeper
 	[Activity(Label = "@string/activityLabelEntryList")]
 	public class EntryListActivity : Activity
 	{
+    
+        BookkeeperManager manager;
         ListView lvEntries;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.EntryListActivity);
-
-			SetupListView();
-		}
+            SetupActivity();
+        }
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-			lvEntries.Adapter = new EntryAdapter(this);
+            if (manager.Entries.Count > 0)
+                lvEntries.Adapter = new EntryAdapter(this);
 		}
 
-		private void SetupListView()
+        private void SetupActivity()
+        {
+            manager = BookkeeperManager.Instance;
+            if (manager.Entries.Count > 0)
+            {
+                SetupListView();
+            }
+            else
+            {
+                TextView tvMessage = FindViewById<TextView>(Resource.Id.tvMessage);
+                tvMessage.Text = GetString(Resource.String.entryListNoEvents);
+            }
+        }
+
+        private void SetupListView()
 		{
 			EntryAdapter adapter = new EntryAdapter(this);
 			lvEntries = FindViewById<ListView>(Resource.Id.lvEntries);

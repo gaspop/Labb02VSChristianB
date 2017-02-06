@@ -4,15 +4,11 @@ using Android.OS;
 using Android.Content;
 using Android.Util;
 
-using Bookkeeper.Model;
-
 namespace Bookkeeper
 {
     [Activity(MainLauncher = true, Icon = "@drawable/bookkeeperIcon")]
     public class MainActivity : Activity
     {
-
-		public static readonly string TAG = "MainActivity";
 
         Button btnNewEvent;
 		Button btnShowAllEvents;
@@ -22,15 +18,14 @@ namespace Bookkeeper
         {
             base.OnCreate(bundle);
 			SetContentView (Resource.Layout.MainActivity);
-
-			SetTitle(Resource.String.activityLabelMain);
-			SetupButtons();
+            SetupActivity();
 
         }
 
-        private void SetupButtons()
+        private void SetupActivity()
 		{
-			btnNewEvent = FindViewById<Button>(Resource.Id.btnNewEvent);
+            SetTitle(Resource.String.activityLabelMain);
+            btnNewEvent = FindViewById<Button>(Resource.Id.btnNewEvent);
 			btnShowAllEvents = FindViewById<Button>(Resource.Id.btnShowAllEvents);
 			btnCreateReports = FindViewById<Button>(Resource.Id.btnCreateReports);
 

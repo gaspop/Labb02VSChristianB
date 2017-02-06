@@ -15,12 +15,13 @@ namespace Bookkeeper.Model
 {
     class EntryAdapter: BaseAdapter<Entry>
     {
-		BookkeeperManager manager = BookkeeperManager.Instance;
+        BookkeeperManager manager;
         Activity activity;
         List<Entry> list;
 
         public EntryAdapter(Activity activity)
         {
+            manager = BookkeeperManager.Instance;
             this.activity = activity;
 			list = manager.Entries.OrderBy(e => e.Date).ToList();
         }

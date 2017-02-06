@@ -14,13 +14,6 @@ using SQLite;
 
 namespace Bookkeeper.Model
 {
-
-    public enum EntryType 
-	{ 
-		Income = 1, 
-		Expense = 2, 
-	}
-
 	public class Entry : Java.Lang.Object
     {
 		[PrimaryKey, AutoIncrement, Column("_id")]
@@ -32,6 +25,13 @@ namespace Bookkeeper.Model
         public int MoneyAccountNumber { get; set; }
         public int SumTotal { get; set; }
         public float Rate { get; set; }
+    }
+
+
+    public enum EntryType
+    {
+        Income = 1,
+        Expense = 2,
     }
 
 }

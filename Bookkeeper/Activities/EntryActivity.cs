@@ -19,7 +19,6 @@ namespace Bookkeeper
 	[Activity(Label = "@string/activityLabelEntryAdd")]
 	public class EntryActivity : Activity
 	{
-        public static readonly string TAG = "EntryActivity";
 
 		BookkeeperManager manager;
 		bool modeEdit;
@@ -39,9 +38,13 @@ namespace Bookkeeper
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.EntryActivity);
+            SetupActivity();
+        }
 
-			manager = BookkeeperManager.Instance;
-			modeEdit = Intent.GetBooleanExtra("EXTRA_EDIT", false);
+        private void SetupActivity()
+        {
+            manager = BookkeeperManager.Instance;
+            modeEdit = Intent.GetBooleanExtra("EXTRA_EDIT", false);
             entryEditId = Intent.GetIntExtra("EXTRA_ID", 0);
             InstantiateViews();
             SetupViews();
@@ -99,7 +102,6 @@ namespace Bookkeeper
         private void SetupRadioButtons()
         {
             radSetIncome.Click += delegate{ SetModeIncome(); };
-
             radSetExpense.Click += delegate { SetModeExpense(); };
         }
 
@@ -214,19 +216,12 @@ namespace Bookkeeper
 
         private int GetAccountFromSpinner(Spinner spin)
         {
-			try
-			{
-				return ((Account)spin.SelectedItem).Number;
-			}
-			catch
-			{
-				return 0;
-			}
+			return ((Account) spin.SelectedItem).Number;
         }
 
         private float GetTaxRateFromSpinner()
         {
-			return ((TaxRate)spinVAT.SelectedItem).Rate;
+			return ((TaxRate) spinVAT.SelectedItem).Rate;
         }
 
         private bool ValidateData()

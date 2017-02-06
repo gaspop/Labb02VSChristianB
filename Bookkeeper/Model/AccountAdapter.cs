@@ -21,8 +21,8 @@ namespace Bookkeeper.Model
 
 		public AccountAdapter(Activity activity)
 		{
-			this.activity = activity;
 			manager = BookkeeperManager.Instance;
+			this.activity = activity;
 			list = manager.Accounts.OrderBy(a => a.Type).ToList();
 		}
 
@@ -76,7 +76,7 @@ namespace Bookkeeper.Model
             return view;
 		}
 
-		public TableRow NewTableRow(Entry e)
+		private TableRow NewTableRow(Entry e)
 		{
 			TableRow tr = (TableRow)View.Inflate(activity, Resource.Layout.ReportTableRow, null);
 			TextView tvRowDate = tr.FindViewById<TextView>(Resource.Id.rowDate);

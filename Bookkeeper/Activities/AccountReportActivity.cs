@@ -19,17 +19,31 @@ namespace Bookkeeper
 	public class AccountReportActivity : Activity
 	{
 
-		ListView lvAccounts;
+        BookkeeperManager manager;
+        ListView lvAccounts;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.AccountReportActivity);
-
-			AccountAdapter adapter = new AccountAdapter(this);
-			lvAccounts = FindViewById<ListView>(Resource.Id.lvAccounts);
-			lvAccounts.Adapter = adapter;
+            SetupActivity();
 		}
+
+        private void SetupActivity()
+        {
+            manager = BookkeeperManager.Instance;
+            if (manager.Entries.Count > 0)
+            {
+                AccountAdapter adapter = new AccountAdapter(this);
+                lvAccounts = FindViewById<ListView>(Resource.Id.lvAccounts);
+                lvAccounts.Adapter = adapter;
+            }
+            else
+            {
+                TextView tvMessage = FindViewById<TextView>(Resource.Id.tvMessage);
+                tvMessage.Text = GetString(Resource.String.accountReportNoEvents);
+            }
+        }
 
 	}
 }

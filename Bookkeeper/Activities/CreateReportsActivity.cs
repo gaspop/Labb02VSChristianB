@@ -26,11 +26,10 @@ namespace Bookkeeper
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.CreateReportsActivity);
-
-			SetupButtons();
+            SetupActivity();
 		}
 
-		private void SetupButtons()
+		private void SetupActivity()
 		{
 			btnAccountReport = FindViewById<Button>(Resource.Id.btnAccountReport);
 			btnAccountReport.Click += delegate
