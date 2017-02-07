@@ -19,7 +19,6 @@ namespace Bookkeeper
             base.OnCreate(bundle);
 			SetContentView (Resource.Layout.MainActivity);
             SetupActivity();
-
         }
 
         private void SetupActivity()

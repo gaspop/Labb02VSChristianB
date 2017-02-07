@@ -48,7 +48,7 @@ namespace Bookkeeper
         private void OrganizeTaxReport()
         {
 			int totalSum = 0;
-            string[] splitter = new string[] { "\n\n" };
+            string[] splitter = { "\n\n" };
             string[] report = manager.GetTaxReport().Split(splitter, StringSplitOptions.RemoveEmptyEntries);
             for(int i = 0; i < report.Length; i++)
             {
@@ -64,7 +64,7 @@ namespace Bookkeeper
                 tableReport.AddView(tr, i +1);
 
                 TextView tvRowTotalSum = FindViewById<TextView>(Resource.Id.taxReportTotalVATSum);
-                tvRowTotalSum.Text = string.Format("{0}", totalSum);
+                tvRowTotalSum.Text = string.Format("{0} kr", totalSum);
             }
         }
     }
