@@ -32,7 +32,7 @@ namespace Bookkeeper
         RadioButton radSetIncome, radSetExpense;
         EditText etDescription, etTotalSum;
         TextView tvDescription, tvTotalSum;
-        Spinner spinType, spinAccount, spinVAT;
+		Spinner spinType, spinAccount, spinTaxRate;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -62,7 +62,7 @@ namespace Bookkeeper
             etTotalSum = FindViewById<EditText>(Resource.Id.etTotalSum);
             spinType = FindViewById<Spinner>(Resource.Id.spinType);
             spinAccount = FindViewById<Spinner>(Resource.Id.spinAccount);
-            spinVAT = FindViewById<Spinner>(Resource.Id.spinVAT);
+            spinTaxRate = FindViewById<Spinner>(Resource.Id.spinVAT);
         }
 
         private void SetupViews()
@@ -80,7 +80,7 @@ namespace Bookkeeper
             if (entryDate == DateTime.MinValue)
                 SetDate(DateTime.Now);
 
-            etTotalSum.TextChanged += delegate { SetTotalSumVAT(); };
+            etTotalSum.TextChanged += delegate { SetTotalSum(); };
         }
 
 		private void SetupButtons()
@@ -117,8 +117,8 @@ namespace Bookkeeper
             List<TaxRate> list = manager.TaxRates;
             ArrayAdapter adapter = new ArrayAdapter<TaxRate>(this, Resource.Layout.EntrySpinnerItem, list);
             adapter.SetDropDownViewResource(Resource.Layout.EntrySpinnerDropdownItem);
-            spinVAT.Adapter = adapter;
-			spinVAT.ItemSelected += delegate { SetTotalSumVAT(); };
+            spinTaxRate.Adapter = adapter;
+			spinTaxRate.ItemSelected += delegate { SetTotalSum(); };
         }
 
 		private void SetupEditMode()
@@ -139,14 +139,14 @@ namespace Bookkeeper
 			}
 			tvDescription.Text = GetString(Resource.String.entryEditInstructions);
 			etDescription.Text = entryEdit.Description;
-			etTotalSum.Text = string.Format("{0}", entryEdit.SumTotal);
+			etTotalSum.Text = string.Format("{0}", entryEdit.TotalSum);
 			spinAccount.SetSelection
 					   (GetMatchingAccountNumberIndex(entryEdit.MoneyAccountNumber, manager.MoneyAccounts));
-			spinVAT.SetSelection(GetMatchingTaxRateIndex());
+			spinTaxRate.SetSelection(GetMatchingTaxRateIndex());
 			btnEntry.Text = GetString(Resource.String.entryUpdateEvent);
 			SetTitle(Resource.String.activityLabelEntryEdit);
 			SetDate(entryEdit.Date);
-			SetTotalSumVAT();
+			SetTotalSum();
 		}
 
         private void SetModeIncome()
@@ -163,9 +163,9 @@ namespace Bookkeeper
 			SetupAccountSpinner(spinType, manager.ExpenseAccounts);
 		}
 
-		private void SetTotalSumVAT()
+		private void SetTotalSum()
 		{
-			TaxRate t = (TaxRate)spinVAT.SelectedItem;
+			TaxRate t = (TaxRate)spinTaxRate.SelectedItem;
 			try
 			{
 				double sum = Convert.ToDouble(etTotalSum.Text);
@@ -206,22 +206,22 @@ namespace Bookkeeper
 
 		private int GetMatchingTaxRateIndex()
 		{
-			for (int i = 0; i < spinVAT.Count; i++)
+			for (int i = 0; i < spinTaxRate.Count; i++)
 			{
-				if (((TaxRate)spinVAT.Adapter.GetItem(i)).Rate == entryEdit.Rate)
+				if (((TaxRate)spinTaxRate.Adapter.GetItem(i)).Rate == entryEdit.Rate)
 					return i;
 			}
 			return 0;
 		}
 
-        private int GetAccountFromSpinner(Spinner spin)
+		private int GetAccountNumberFromSpinner(Spinner spin)
         {
 			return ((Account) spin.SelectedItem).Number;
         }
 
         private float GetTaxRateFromSpinner()
         {
-			return ((TaxRate) spinVAT.SelectedItem).Rate;
+			return ((TaxRate) spinTaxRate.SelectedItem).Rate;
         }
 
         private bool ValidateData()
@@ -260,9 +260,9 @@ namespace Bookkeeper
 				e.Type = entryType;
 				e.Date = entryDate;
 				e.Description = etDescription.Text;
-				e.TypeAccountNumber = GetAccountFromSpinner(spinType);
-				e.MoneyAccountNumber = GetAccountFromSpinner(spinAccount);
-				e.SumTotal = Convert.ToInt32(etTotalSum.Text);
+				e.TypeAccountNumber = GetAccountNumberFromSpinner(spinType);
+				e.MoneyAccountNumber = GetAccountNumberFromSpinner(spinAccount);
+				e.TotalSum = Convert.ToInt32(etTotalSum.Text);
 				e.Rate = GetTaxRateFromSpinner();
 
 				return e;
@@ -274,7 +274,7 @@ namespace Bookkeeper
         {
 			manager.AddEntry(e);
 			string message = GetString(Resource.String.entryToastEntryAdded);
-			Toast.MakeText(this, message, ToastLength.Long).Show();
+			Toast.MakeText(this, message, ToastLength.Short).Show();
 			Finish();
 		}
 
@@ -285,13 +285,13 @@ namespace Bookkeeper
 			entryEdit.Description = entry.Description;
 			entryEdit.TypeAccountNumber = entry.TypeAccountNumber;
 			entryEdit.MoneyAccountNumber = entry.MoneyAccountNumber;
-			entryEdit.SumTotal = entry.SumTotal;
+			entryEdit.TotalSum = entry.TotalSum;
 			entryEdit.Rate = entry.Rate;
 
 			manager.UpdateEntry(entryEdit);
 
 			string message = GetString(Resource.String.entryToastEntryUpdated);
-			Toast.MakeText(this, message, ToastLength.Long).Show();
+			Toast.MakeText(this, message, ToastLength.Short).Show();
 			Finish();
 		}
     }
@@ -300,7 +300,7 @@ namespace Bookkeeper
 
     public class DatePickerFragment : DialogFragment, DatePickerDialog.IOnDateSetListener
     {
-        public static readonly string TAG = "EVENTDATEPICKER";
+        public static readonly string TAG = "EntryDatePicker";
 
         Action<DateTime> _dateSelectedHandler = delegate { };
 

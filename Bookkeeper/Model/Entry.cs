@@ -23,7 +23,7 @@ namespace Bookkeeper.Model
         public string Description { get; set; }
         public int TypeAccountNumber { get; set; }
         public int MoneyAccountNumber { get; set; }
-        public int SumTotal { get; set; }
+        public int TotalSum { get; set; }
         public float Rate { get; set; }
     }
 

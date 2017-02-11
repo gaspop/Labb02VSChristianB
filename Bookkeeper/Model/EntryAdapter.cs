@@ -55,7 +55,7 @@ namespace Bookkeeper.Model
             Entry entry = list[position];
             tvDate.Text = entry.Date.ToString("yyyy-MM-dd");
             tvDescription.Text = entry.Description;
-            tvSum.Text = entry.SumTotal + " kr";
+            tvSum.Text = entry.TotalSum + " kr";
 			tvSum.SetTextColor
 			     (entry.Type == EntryType.Income ? Color.ForestGreen : Color.OrangeRed);
 

@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
+using Android.Util;
 
 namespace Bookkeeper.Model
 {
@@ -50,30 +51,40 @@ namespace Bookkeeper.Model
 
 			TextView tvName = view.FindViewById<TextView>(Resource.Id.reportAccount);
 			TableLayout tlEntries = view.FindViewById<TableLayout>(Resource.Id.reportTableEntries);
+			LinearLayout llResult = view.FindViewById<LinearLayout>(Resource.Id.reportResult);
 			TextView tvSum = view.FindViewById<TextView>(Resource.Id.reportTotalSum);
 
 			Account account = list[position];
-			List<Entry> entries = manager.Entries.OrderBy(e => e.Date).ToList();
-			if (account.Type != AccountType.Money)
-				entries = entries.Where(e => e.TypeAccountNumber == account.Number).ToList();
-			else
-				entries = entries.Where(e => e.MoneyAccountNumber == account.Number).ToList();
+			List<Entry> entries = manager.Entries.OrderBy(e => e.Date)
+						.Where(e => e.TypeAccountNumber == account.Number
+	             	             || e.MoneyAccountNumber == account.Number).ToList();
+			Log.Debug("AccountAdapter", account.Name + ": " + entries.Count);
 
 			tvName.Text = account.Name + " (" + account.Number + ")";
 			tlEntries.RemoveAllViews();
-			int SumTotal = 0;
-			for (int i = 0; i < entries.Count; i++)
+			if (entries.Count > 0)
 			{
-				entries[i].SumTotal *= (entries[i].Type == EntryType.Income) ? 1 : (-1);
-				SumTotal += entries[i].SumTotal;
-				tlEntries.AddView(NewTableRow(entries[i]));
+				int TotalSum = 0;
+				for (int i = 0; i < entries.Count; i++)
+				{
+					entries[i].TotalSum *= (entries[i].Type == EntryType.Income) ? 1 : (-1);
+					TotalSum += entries[i].TotalSum;
+					tlEntries.AddView(NewTableRow(entries[i]));
+				}
+				tvSum.Text = TotalSum + " kr";
+				tlEntries.Visibility = ViewStates.Visible;
+				llResult.Visibility = ViewStates.Visible;
 			}
-			tvSum.Text = SumTotal + " kr";
+			else
+			{
+				tlEntries.Visibility = ViewStates.Gone;
+				llResult.Visibility = ViewStates.Gone;
+			}
 
-            view.SetBackgroundColor
-              (position % 2 == 0 ? new Color(56,56,56) : view.DrawingCacheBackgroundColor);
-
-            return view;
+			view.SetBackgroundColor
+			  (position % 2 == 0 ? new Color(56, 56, 56) : view.DrawingCacheBackgroundColor);
+			return view;
+				
 		}
 
 		private TableRow NewTableRow(Entry e)
@@ -85,7 +96,7 @@ namespace Bookkeeper.Model
 
 			tvRowDate.Text = e.Date.ToString("yyyy-MM-dd");
 			tvRowDescription.Text = e.Description;
-			tvRowSum.Text = string.Format("{0}", e.SumTotal);
+			tvRowSum.Text = string.Format("{0}", e.TotalSum);
 			tvRowSum.SetTextColor
 			        (e.Type == EntryType.Income ? Color.ForestGreen : Color.OrangeRed);
 
