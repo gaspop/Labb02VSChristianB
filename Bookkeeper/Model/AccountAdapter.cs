@@ -10,7 +10,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
-using Android.Util;
 
 namespace Bookkeeper.Model
 {
@@ -58,7 +57,6 @@ namespace Bookkeeper.Model
 			List<Entry> entries = manager.Entries.OrderBy(e => e.Date)
 						.Where(e => e.TypeAccountNumber == account.Number
 	             	             || e.MoneyAccountNumber == account.Number).ToList();
-			Log.Debug("AccountAdapter", account.Name + ": " + entries.Count);
 
 			tvName.Text = account.Name + " (" + account.Number + ")";
 			tlEntries.RemoveAllViews();
